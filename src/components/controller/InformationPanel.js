@@ -1,11 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function InformationPanel() {
+function InformationPanel(props) {
     return (
-      <div className="containerInformationPanel">
-          <h1> Information Panel </h1>
+      <div className='containerInformationPanel'>
+          { props.children }
       </div>
     );
+}
+
+InformationPanel.propTypes = {
+    children: PropTypes.node.isRequired
 }
 
 export { InformationPanel };
