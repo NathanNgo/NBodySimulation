@@ -1,0 +1,98 @@
+@import-normalize;
+
+:root {
+    --mainBackgroundColor: #f5f5f4;
+    --headerBackgroundColor: #021c2b;
+    --sideBackgroundColor: #02131c;
+    --mainText: #f5f5f4;
+    --accentText: #06d6a0;
+}
+
+/* FONTS */
+@font-face {
+    font-family: MoonBold;
+    src: url("../css/MOON2/Moon2.0-Bold.woff") format("woff"), url("../css/MOON2/Moon2.0-Bold.ttf") format("ttf");
+}
+
+/* MISC */
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    height: 100%;
+}
+
+div {
+    margin: auto;
+}
+
+div#root {
+    height: 100%;
+}
+
+p, h1 {
+    margin: 0;
+    color: var(--mainText);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-color: var(--headerBackgroundColor);
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+    margin: 0;
+    background-color: var(--mainBackgroundColor);
+}
+
+/* LINKS */
+a:link {
+    color: black;
+    background-color: #b3dcff;
+}
+a:visited {
+    color: black;
+    background-color: #b3dcff;
+}
+a:hover {
+    background-color: #5babf0;
+}
+
+.acc {
+    /* color: #0129c6; */
+    color: var(--accentText);
+}
+
+/* GRID SETUP */
+.containerMain {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    grid-template-rows: repeat(24, 1fr);
+    height: 100%;
+    width: 100%;
+}
+
+.header {
+    grid-column: 1 / 25;
+    grid-row: 1 / 2;
+}
+
+.sideBar {
+    background-color: var(--sideBackgroundColor);
+    grid-column: 1 / 7;
+    grid-row: 2 / 24;
+}
+
+.viewScreen {
+    grid-column: 7 / 25;
+    grid-row: 2 / 24;
+}
+
+.footer {
+    background-color: var(--headerBackgroundColor);
+    grid-column: 1 / 25;
+    grid-row: 24 / 25;
+}

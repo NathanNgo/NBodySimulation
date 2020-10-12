@@ -1,26 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
+import { NBodySimulation } from './components/NBodySimulation';
 
+// First component. Used to set up data structures and other objects
+// which might be used by child components. Can be passed via props.
+// e.g. Axios object to communicate to back end (Setting baseURL and other settings).
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    //document.body.style = 'background: #f5f5f4';
+    return (
+        <NBodySimulation />
+    );
 }
 
 export default App;
