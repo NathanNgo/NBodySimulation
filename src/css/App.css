@@ -3,11 +3,12 @@
 /* VARIABLES */
 :root {
     --mainBackgroundColor: black;/*#f5f5f4; Smokey White*/
-    --headerBackgroundColor: #021c2b;
-    --sideBackgroundColor: #02131c;
+    /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
+    --headerBackgroundColor: #02131c;/*#021c2b;*/
+    --sideBackgroundColor: #021c2b;/*#02131c;*/
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
-    --infoPanelColor: #093047;
+    --panelColor: #093047;
 }
 
 /* FONTS */
@@ -44,28 +45,35 @@ header {
     margin: 0;
 }
 
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 body {
     margin: 0;
     background-color: var(--mainBackgroundColor);
 }
 
-/* LINKS */
-a:link {
-    color: black;
-    background-color: #b3dcff;
-}
-a:visited {
-    color: black;
-    background-color: #b3dcff;
-}
-a:hover {
-    background-color: #5babf0;
-}
-
 .acc {
     /* color: #0129c6; */
     color: var(--accentText);
+}
+
+
+/* LINKS */
+/* FIXME: Yellow looks terrible. */
+a:link {
+    color: yellow;
+    /*background-color: #b3dcff;*/
+}
+a:visited {
+    color: yellow;
+    /*background-color: #b3dcff*/
+}
+a:hover {
+    background-color: #5babf0;
 }
 
 /* GRID SETUP */
@@ -99,18 +107,19 @@ a:hover {
     grid-row: 24 / 25;
 }
 
-/* INFORMATION PANEL STYLE */
-.containerInformationPanel {
-    background-color: var(--infoPanelColor);
+/* SIDEBAR STYLE */
+.subTitle {
+    margin-bottom: 12px;
+    text-decoration: underline;
+}
+
+/* PANEL STYLE */
+.containerPanel {
+    background-color: var(--panelColor);
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-}
-
-.subTitle {
-    margin-bottom: 12px;
-    text-decoration: underline;
 }
 
 /* VIEW SCREEN STYLE */
@@ -120,4 +129,18 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* STARTBUTTON STYLE */
+.startButton {
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    background: url(icons/play_arrow-24px.svg) no-repeat 20px 7px;
+    background-color: #00E676;
+    padding-left: 20px;
+    padding-top: 1px;
 }
