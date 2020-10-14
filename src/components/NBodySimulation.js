@@ -17,7 +17,7 @@ class NBodySimulation extends React.Component {
                     <ViewScreen />
                 </section>
                 <footer className='footer'>
-                    <p> Github Goes Here </p>
+                    <p> <a href='https://github.com/NathanNgo/NBodySimulation'> GitHub </a> </p>
                 </footer>
             </div>
         );
