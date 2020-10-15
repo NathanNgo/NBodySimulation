@@ -9,6 +9,11 @@
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
     --panelColor: #093047;
+
+    /* BUTTON COLORS */
+    --playButtonColor: /*#00E676;*/ #28a745;
+    --pauseButtonColor: /*#00B0FF;*/ #007bff;
+    --resetButtonColor: /*#FF1744;*/ #dc3545;
 }
 
 /* FONTS */
@@ -131,16 +136,35 @@ a:hover {
     justify-content: center;
 }
 
-/* STARTBUTTON STYLE */
-.startButton {
-    width: 120px;
-    height: 40px;
+/* BUTTON STYLES */
+.button {
+    margin: 0px 5px;
+    min-width: 58px;
+    min-height: 36px;
     border: none;
     border-radius: 5px;
     font-size: 17px;
     font-weight: bold;
-    background: url(icons/play_arrow-24px.svg) no-repeat 20px 7px;
-    background-color: #00E676;
-    padding-left: 20px;
-    padding-top: 1px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.buttonValues {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* BUTTON COLORS */
+.playButton {
+    background-color: var(--playButtonColor);
+}
+
+.pauseButton {
+    background-color: var(--pauseButtonColor);
+}
+
+.resetButton {
+    background-color: var(--resetButtonColor);
 }
