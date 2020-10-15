@@ -7,7 +7,7 @@ import resetIcon from '../../css/icons/reset-24px.svg';
 
 function SideBar() {
     return (
-      <div >
+      <div>
           <Panel>
               <h2 className='subTitle'> Information Panel </h2>
               <p> The <b>N Body Simulation</b> is degined to represent collisions and interactions between <span className='acc'>N</span> objects. </p>
