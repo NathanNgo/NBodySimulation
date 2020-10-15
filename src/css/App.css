@@ -54,6 +54,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--headerBackgroundColor);
 }
 
 body {
@@ -107,7 +108,6 @@ a:hover {
 }
 
 .footer {
-    background-color: var(--headerBackgroundColor);
     grid-column: 1 / 25;
     grid-row: 24 / 25;
 }
