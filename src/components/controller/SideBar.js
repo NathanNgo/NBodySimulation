@@ -8,23 +8,24 @@ import resetIcon from '../../css/icons/reset-24px.svg';
 function SideBar() {
     return (
       <div>
-          <Panel>
-              <h2 className='subTitle'> Information Panel </h2>
+          <Panel title='Information Panel'>
               <p> The <b>N Body Simulation</b> is degined to represent collisions and interactions between <span className='acc'>N</span> objects. </p>
           </Panel>
-          <Panel>
-              <h2 className='subTitle'> Controls </h2>
+          <Panel title='Controls'>
               <Button
                   className='playButton'
                   iconURL={playIcon}
+                  //onClick=...
               />
               <Button
                   className='pauseButton'
                   iconURL={pauseIcon}
+                  //onClick=...
               />
               <Button
                   className='resetButton'
                   iconURL={resetIcon}
+                  //onClick=...
               />
           </Panel>
       </div>
