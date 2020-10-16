@@ -18,9 +18,9 @@ function Button(props) {
 
 Button.propTypes = {
     children: PropTypes.node,
-    onClick: PropTypes.func.isRequired,
     className: PropTypes.string.isRequired,
-    iconURL: PropTypes.string
+    iconURL: PropTypes.string,
+    onClick: PropTypes.func.isRequired
 }
 
 export { Button };
