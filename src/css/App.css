@@ -9,6 +9,7 @@
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
     --panelColor: #093047;
+    --panelHeaderColor: #0a3954;/*#072638;*/
 
     /* BUTTON COLORS */
     --playButtonColor: /*#00E676;*/ #28a745;
@@ -98,6 +99,7 @@ a:hover {
 
 .sideBar {
     background-color: var(--sideBackgroundColor);
+    min-width: 244px;
     grid-column: 1 / 7;
     grid-row: 2 / 24;
 }
@@ -112,25 +114,40 @@ a:hover {
     grid-row: 24 / 25;
 }
 
-/* SIDEBAR STYLE */
-.subTitle {
-    margin-bottom: 12px;
-    text-decoration: underline;
-}
-
 /* PANEL STYLE */
 .containerPanel {
-    background-color: var(--panelColor);
     margin: 10px;
-    padding: 10px;
-    border-radius: 10px;
     text-align: center;
 }
 
-.panelHeader {
+.panelHeaderOpen {
+    padding: 10px;
+    border-radius: 10px 10px 0px 0px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    background-color: var(--panelHeaderColor);
+}
+
+.panelHeaderClosed {
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--panelHeaderColor);
+}
+
+.panelSeperator {
+    height: 3px;
+    width: 100%;
+    background-color: var(--sideBackgroundColor);
+}
+
+.panelBody {
+    padding: 10px;
+    background-color: var(--panelColor);
+    border-radius: 0px 0px 10px 10px;
 }
 
 /* VIEW SCREEN STYLE */
@@ -173,4 +190,10 @@ a:hover {
 
 .resetButton {
     background-color: var(--resetButtonColor);
+}
+
+.chevronButton {
+    min-height: 0px;
+    min-width: 0px;
+    background-color: transparent;
 }
