@@ -1,43 +1,47 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from './input/Button';
-import expandMore from '../../css/icons/expand_more-24px.svg';
-import expandLess from '../../css/icons/expand_less-24px.svg';
+import chevDown from '../../css/icons/chevDown24dp.svg';
+import chevRight from '../../css/icons/chevRight24dp.svg';
 
-function Panel(props) {
+function ClosablePanel(props) {
     const [ isOpen, setIsOpen ] = useState(true);
+    const iconURL = isOpen ? chevDown : chevRight;
 
     if (isOpen) {
         return (
             <div className='containerPanel'>
-                <div className='panelHeader'>
-                    <h2 className='subTitle'> { props.title } </h2>
+                <div className='panelHeaderOpen'>
+                    <h2> { props.title } </h2>
                     <Button
                         className='chevronButton'
-                        iconURL={ isOpen ? expandLess : expandMore }
+                        iconURL={iconURL}
                         onClick={ () => setIsOpen(!isOpen) }
                     />
                 </div>
-                { props.children }
+                <div className='panelSeperator' />
+                <div className='panelBody'>
+                    { props.children }
+                </div>
             </div>
         );
     }
 
     return (
-        <div className='containerPanel panelHeader'>
-            <h2 className='subTitle'> { props.title } </h2>
+        <div className='containerPanel panelHeaderClosed'>
+            <h2> { props.title } </h2>
             <Button
                 className='chevronButton'
-                iconURL={ isOpen ? expandLess : expandMore }
+                iconURL={iconURL}
                 onClick={ () => setIsOpen(!isOpen) }
             />
         </div>
     );
 }
 
-Panel.propTypes = {
+ClosablePanel.propTypes = {
     children: PropTypes.node.isRequired,
     title: PropTypes.string.isRequired
 }
 
-export { Panel };
+export { ClosablePanel };
