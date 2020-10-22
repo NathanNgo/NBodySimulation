@@ -2,9 +2,9 @@
 
 /* VARIABLES */
 :root {
-    --mainBackgroundColor: black;/*#f5f5f4; Smokey White*/
+    --mainBackgroundColor: #021018;/*#f5f5f4;*/
     /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
-    --headerBackgroundColor: #02131c;/*#021c2b;*/
+    --headerBackgroundColor: #072232;/*#02131c;*//*#021c2b;*/
     --sideBackgroundColor: #021c2b;/*#02131c;*/
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
@@ -49,6 +49,8 @@ header {
     background-color: var(--headerBackgroundColor);
     padding: 0;
     margin: 0;
+    border-bottom: 3px solid #010A0E;
+
 }
 
 footer {
@@ -56,6 +58,7 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: var(--headerBackgroundColor);
+    border-top: 3px solid #010A0E;
 }
 
 body {
