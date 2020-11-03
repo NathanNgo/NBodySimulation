@@ -1,10 +1,12 @@
 import React from 'react';
+import Canvas from './Canvas';
 
 function ViewScreen() {
     return (
-      <div className='containerViewScreen'>
-          <h1> View Screen </h1>
-      </div>
+        <div className='containerViewScreen'>
+            <Canvas>
+            </Canvas>
+        </div>
     );
 }
 
