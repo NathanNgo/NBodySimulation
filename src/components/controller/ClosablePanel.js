@@ -27,6 +27,8 @@ function ClosablePanel(props) {
         );
     }
 
+    // Use CSS to hide to panel, don't remove the HTML. Just attached a
+    // class selector.
     return (
         <div className='containerPanel panelHeaderClosed'>
             <h2> { props.title } </h2>
