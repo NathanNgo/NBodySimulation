@@ -9,7 +9,18 @@ class NBodySimulation extends React.Component {
         super(props);
 
         this.state = {
-            initVals: [new Circle(0, 0, 33, 50, 60), new Circle(0, 0, 77, 344, 455)]
+            initVals: [new Circle(0, 0, 33, 50, 60), new Circle(0, 0, 77, 344, 455)],
+            canvasHasResized: false,
+            canvasWidth: undefined,
+            canvasHeight: undefined
+        }
+
+        this.canvasHasResized = this.canvasHasResized.bind(this);
+    }
+
+    canvasHasResized(width, height) {
+        if (!this.state.canvasHasResized) {
+            this.setState({ canvasHasResized: true, canvasWidth: width, canvasHeight: height })
         }
     }
 
