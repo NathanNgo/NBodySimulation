@@ -1,6 +1,7 @@
 import React from 'react';
 import { SideBar } from './controller/SideBar';
 import { ViewScreen } from './view/ViewScreen';
+import { Circle } from '../physics/rigid';
 
 // The "actual" root component.
 class NBodySimulation extends React.Component {
@@ -8,7 +9,7 @@ class NBodySimulation extends React.Component {
         super(props);
 
         this.state = {
-            initVals: undefined
+            initVals: [new Circle(0, 0, 33, 50, 60), new Circle(0, 0, 77, 344, 455)]
         }
     }
 
