@@ -17,7 +17,7 @@ class NBodySimulation extends React.Component {
         return (
             <div className='containerMain'>
                 <header className='header'>
-                    <h1> <span className='acc'>N Body Simulation </span> </h1>
+                    <h1> <span className='acc'>N Body Simulation (Work In Progress)</span> </h1>
                 </header>
                 <section className='sideBar'>
                     <SideBar />
