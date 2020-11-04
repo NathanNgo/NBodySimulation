@@ -1,11 +1,11 @@
 import React from 'react';
-import Canvas from './Canvas';
+import CanvasPhys from './CanvasPhys';
 
-function ViewScreen() {
+function ViewScreen(props) {
     return (
         <div className='containerViewScreen'>
-            <Canvas>
-            </Canvas>
+            <CanvasPhys initVals={props.initVals}>
+            </CanvasPhys>
         </div>
     );
 }
