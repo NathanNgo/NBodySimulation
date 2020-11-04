@@ -4,6 +4,14 @@ import { ViewScreen } from './view/ViewScreen';
 
 // The "actual" root component.
 class NBodySimulation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            initVals: undefined
+        }
+    }
+
     render() {
         return (
             <div className='containerMain'>
@@ -14,7 +22,7 @@ class NBodySimulation extends React.Component {
                     <SideBar />
                 </section>
                 <section className='viewScreen'>
-                    <ViewScreen />
+                    <ViewScreen initVals={this.state.initVals} />
                 </section>
                 <footer className='footer'>
                     <p> <a href='https://github.com/NathanNgo/NBodySimulation'> GitHub </a> </p>
