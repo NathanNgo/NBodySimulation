@@ -1,5 +1,5 @@
 import { Circle, Polygon } from './rigid';
-import vec2 from 'gl-matrix/vec2';
+import { vec2 } from 'gl-matrix';
 
 function isColliding(obj1, obj2) {
     const isCircle1 = obj1 instanceof Circle ? true : false;
