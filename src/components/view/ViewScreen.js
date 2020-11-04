@@ -4,7 +4,7 @@ import CanvasPhys from './CanvasPhys';
 function ViewScreen(props) {
     return (
         <div className='containerViewScreen'>
-            <CanvasPhys initVals={props.initVals}>
+            <CanvasPhys vals={props.initVals}>
             </CanvasPhys>
         </div>
     );
