@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { draw } from '../render/render.js';
+import draw from '../render/render.js';
 import Engine from '../physics/engine.js';
 
 // A re-render of the canvas will cause it to start simulating with the new initial states.
