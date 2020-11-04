@@ -31,10 +31,10 @@ class NBodySimulation extends React.Component {
                     <h1> <span className='acc'>N Body Simulation (Work In Progress)</span> </h1>
                 </header>
                 <section className='sideBar'>
-                    <SideBar />
+                    {this.state.canvasHasResized ? <SideBar /> : <h2> Loading... </h2>}
                 </section>
                 <section className='viewScreen'>
-                    <ViewScreen initVals={this.state.initVals} />
+                    <ViewScreen initVals={this.state.initVals} onResize={this.canvasHasResized} />
                 </section>
                 <footer className='footer'>
                     <p> <a href='https://github.com/NathanNgo/NBodySimulation'> GitHub </a> </p>
