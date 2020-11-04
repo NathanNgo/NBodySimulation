@@ -16,11 +16,20 @@ function useCanvasPhys(vals) {
         function step(timestamp) {
             draw(ctx, vals);
             /* eslint-disable-next-line */ /* We want to reset on re-render.*/
-            vals = physEng.update(vals);
+            vals.forEach(circle => {
+                const randx = Math.random();
+                const signedRandx = Math.random() < 0.5 ? -randx : randx;
+                circle.x = circle.x + signedRandx + 0.5;
+
+                const randy = Math.random();
+                const signedRandy = Math.random() < 0.5 ? -randy : randy;
+                circle.y = circle.y + signedRandy;
+            });
+            //vals = physEng.update(vals);
             animId = window.requestAnimationFrame(step);
         }
 
-        if (resize(canvas)) {
+        if (resize(canvas, ctx)) {
             console.log('Resized canvas');
         } else {
             console.log('Did not resize canvas');
