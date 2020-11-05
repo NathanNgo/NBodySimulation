@@ -11,8 +11,9 @@ function draw(ctx, vals) {
 }
 
 function drawCircle(ctx, circle) {
+    const [ x, y ] = circle.coordinates;
     ctx.beginPath();
-    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
+    ctx.arc(x, y, circle.radius, 0, 2 * Math.PI);
     ctx.fill();
 }
 
