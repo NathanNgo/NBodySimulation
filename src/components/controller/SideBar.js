@@ -9,7 +9,8 @@ function SideBar() {
     return (
       <div>
           <ClosablePanel title='Information'>
-              <p> The <b>N Body Simulation</b> is designed to represent collisions and interactions between <span className='acc'>N</span> objects. </p>
+              {/*<p> The <b>N Body Simulation</b> is designed to represent collisions and interactions between <span className='acc'>N</span> objects. </p>*/}
+              <p> A simple demonstration of a lightweight physics engine. Still a <span className='acc'> work in progress </span> and very much incomplete. </p>
           </ClosablePanel>
           <ClosablePanel title='Controls'>
               <Button
