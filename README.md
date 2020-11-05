@@ -5,6 +5,7 @@ This project is a React application coupled with a custom lightweight physics en
 https://physics-simulation.netlify.app/
 
 ## To Do
+* Decouple frame rate and time
 * Polygon Rendering
 * Polygon Collisions
 * Interactive Options
