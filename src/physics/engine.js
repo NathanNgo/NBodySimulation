@@ -1,13 +1,16 @@
 import { RigidBody, Circle, Polygon } from './rigid';
-import { isColliding } from './collision';
+import { isColliding, isCollidingBoundary } from './collision/collisionDetection';
+import { resolveCollision, resolveBoundaryCollision } from './collision/collisionResolution';
 
 class Engine {
     /**
      * @constructs Creates an instance of the Engine.
+     * @param {number[]} bounds - Array of integers representing boundaries of simulation.
+     * @param {Object} settings - An object conitaning Engine settings such as graivty and etc.
      */
-    constructor(bounds, gravity) {
+    constructor(bounds, settings) {
         this.bounds = bounds;
-        this.gravity = gravity;
+        this.settings = settings;
     }
 
     /**
