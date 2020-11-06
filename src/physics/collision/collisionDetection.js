@@ -37,8 +37,13 @@ function isCollidingBoundary(obj, bound) {
 }
 
 function circleCircleCollision(obj1, obj2) {
-    const distSqr = (obj1.x - obj2.x)**2 + (obj1.y - obj2.y)**2;
-    return distSqr - (obj1.radius + obj2.radius)**2 <= 0;
+    let distSqr = 0;
+
+    for (let i = 0; i < obj1.coordinates.length; i++) {
+        distSqr += (obj1.coordinates[i] - obj2.coordinates[i])**2;
+    }
+
+    return distSqr <= (obj1.radius + obj2.radius)**2;
 }
 
 function circlePolyCollision(obj1, obj2) {
