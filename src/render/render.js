@@ -14,6 +14,7 @@ function drawCircle(ctx, circle) {
     const [ x, y ] = circle.coordinates;
     ctx.beginPath();
     ctx.arc(x, y, circle.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = circle.color;
     ctx.fill();
 }
 
