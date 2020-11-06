@@ -9,7 +9,8 @@ class PhysicsSimulation extends React.Component {
         super(props);
 
         this.state = {
-            initVals: [new Circle(0, [1, 0], 33, [50, 60]), new Circle(0, [1, 2], 77, [344, 455])],
+            initVals: [],
+            settings: undefined,
             canvasHasResized: false,
             canvasWidth: undefined,
             canvasHeight: undefined
@@ -18,9 +19,44 @@ class PhysicsSimulation extends React.Component {
         this.handleCanvasResize = this.handleCanvasResize.bind(this);
     }
 
+
+    _genRandAttr(width, height) {
+        const mass = 0;
+        const r = Math.random()*(100 - 10) + 10;
+        const xVel = Math.random()*3;
+        const xSign = Math.random() < 0.5 ? -1 : 1;
+        const yVel = Math.random()*3;
+        const ySign = Math.random() < 0.5 ? -1 : 1;
+        const xPos = Math.random()*(width - 2*r) + r;
+        const yPos = Math.random()*(height - 2*r) + r;
+        const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+
+        const res = [mass, xSign*xVel, ySign*yVel, r, xPos, yPos].map((v) => Math.floor(v));
+
+
+        return [...res, color];
+    }
+
+    _genInitVals(width, height) {
+        const amount = Math.random()*(10 - 2) + 2;
+        const vals = []
+        for (let i = 0; i < amount; i++) {
+            const attr = this._genRandAttr(width, height);
+            // FIXME: Redo this.
+            vals.push(new Circle(attr[0], [attr[1], attr[2]], attr[3], [attr[4], attr[5]], attr[6]));
+        }
+
+        return vals;
+    }
+
     handleCanvasResize(width, height) {
         if (!this.state.canvasHasResized) {
-            this.setState({ canvasHasResized: true, canvasWidth: width, canvasHeight: height })
+            this.setState({
+                canvasHasResized: true,
+                canvasWidth: width,
+                canvasHeight: height,
+                initVals: this._genInitVals(width, height)
+            });
         }
     }
 
@@ -35,7 +71,11 @@ class PhysicsSimulation extends React.Component {
                     {this.state.canvasHasResized ? <SideBar /> : <h2> Loading... </h2>}
                 </section>
                 <section className='viewScreen'>
-                    <ViewScreen initVals={this.state.initVals} onResize={this.handleCanvasResize} />
+                    <ViewScreen
+                        initVals={this.state.initVals}
+                        onResize={this.handleCanvasResize}
+                        settings={this.settings}
+                    />
                 </section>
                 <footer className='footer'>
                     <p> <a href='https://github.com/NathanNgo/NBodySimulation'> GitHub </a> </p>
