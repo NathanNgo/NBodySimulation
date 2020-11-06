@@ -1,25 +1,43 @@
-import { Circle, Polygon } from './rigid';
+import { Circle, Polygon } from '../rigid';
 import { vec2 } from 'gl-matrix';
 
+/**
+ * Determines if 2 RigidBody objects are colliding.
+ * @param {RigidBody} obj1 - The first RigidBody.
+ * @param {RigidBody} obj2 - The second RigidBody.
+ * @returns {boolean} Value representing if a collision occured.
+ */
 function isColliding(obj1, obj2) {
     const isCircle1 = obj1 instanceof Circle ? true : false;
     const isCircle2 = obj2 instanceof Circle ? true : false;
 
     if (isCircle1 && isCircle2) {
-        circleCircleCollision(obj1, obj2);
+        return circleCircleCollision(obj1, obj2);
     } else if (!isCircle1 && ! isCircle2) {
-        polyPolyCollision();
+        return polyPolyCollision();
     } else if (obj1 instanceof Circle) {
-        circlePolyCollision(obj1, obj2);
+        return circlePolyCollision(obj1, obj2);
     } else {
-        circlePolyCollision(obj2, obj1);
+        return circlePolyCollision(obj2, obj1);
     }
+}
 
+/**
+ * Determines if an object is colliding with the screens boundary.
+ * @param {RigidBody} obj - The RigidBody we are testing for collision.
+ * @param {Object} bound - An object containing the boundaries.
+ * @returns {number} An integer representing the boundary of collision. -1 if no collision.
+ */
+function isCollidingBoundary(obj, bound) {
+    const isCircle = obj instanceof Circle ? true : false;
+    
+    if (isCircle) {
+        return circleBoundaryCollision(obj, bound);
+    }
 }
 
 function circleCircleCollision(obj1, obj2) {
     const distSqr = (obj1.x - obj2.x)**2 + (obj1.y - obj2.y)**2;
-    // Does <= have to be a float such as 0.0? Check later.
     return distSqr - (obj1.radius + obj2.radius)**2 <= 0;
 }
 
@@ -35,6 +53,24 @@ function polyPolyCollision(obj1, obj2) {
     //const axes2 = getAxes(obj2);
     return null;
 }
+
+function circleBoundaryCollision(obj, bounds) {
+    if (obj.coordinates[0] - obj.radius <= bounds.xMin) {
+        return 0;
+    } else if (obj.coordinates[0] + obj.radius >= bounds.xMax) {
+        return 1;
+    } else if (obj.coordinates[1] - obj.radius <= bounds.yMin) {
+        return 2;
+    } else if (obj.coordinates[1] + obj.radius >= bounds.yMax) {
+        return 3;
+    }
+    return -1;
+}
+
+function polyBoundaryCollision(obj1, bound) {
+    
+}
+
 
 /**
  * @desc Get the projectionn axes. These are the vectors normal to the polynomial edges.
@@ -56,4 +92,4 @@ function getAxes(obj) {
     return axes;
 }
 
-export default isColliding;
+export { isColliding, isCollidingBoundary };
