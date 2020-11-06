@@ -18,14 +18,30 @@ class Engine {
      * @param {RigidBody[]} vals - An array of RigidBody's or objects inherited from RigidBody.
      */
     update(vals) {
-        vals.forEach((body) => {
-            if (body instanceof Circle) {
-                for (let i = 0; i < body.coordinates.length; i++) {
-                    body.coordinates[i] += body.velocity[i];
+        for (let i = 0; i < vals.length; i++) {
+            // Detect boundary collisions.
+            const boundarySide = isCollidingBoundary(vals[i], this.bounds);
+
+            // Handle boundary collision. Can probablly optimise by checking for no collision first.
+            resolveBoundaryCollision(vals[i], boundarySide, this.settings);
+
+            // Detect object-object collision. We can optimise with spatial seperation later.
+            for (let j = i; j < vals.length; j++) {
+                if (isColliding(vals[i], vals[j])) {
+                    // Resolve collisions and change velocity.
+                    resolveCollision(vals[i], vals[j], this.settings);
                 }
             }
-        });
+
+            // Update velocity
+            if (vals[i] instanceof Circle) {
+                for (let c = 0; c < vals[i].coordinates.length; c++) {
+                    vals[i].coordinates[c] += vals[i].velocity[c];
+                }
+            }
+        }
     }
+
 }
 
 export default Engine;
