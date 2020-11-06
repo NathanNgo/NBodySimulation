@@ -2,7 +2,7 @@ import React from 'react';
 import useCanvasPhys from '../../hooks/useCanvasPhys';
 
 function CanvasPhys(props) {
-    const canvasRef = useCanvasPhys(props.vals, props.onResize);
+    const canvasRef = useCanvasPhys(props.vals, props.onResize, props.settings);
 
     return (
         <canvas ref={canvasRef}>
