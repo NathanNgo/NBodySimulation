@@ -21,8 +21,8 @@ class PhysicsSimulation extends React.Component {
 
 
     _genRandAttr(width, height) {
-        const mass = 0;
-        const r = Math.random()*(100 - 10) + 10;
+        const mass = 1;
+        const r = Math.random()*(30 - 10) + 10;
         const xVel = Math.random()*3;
         const xSign = Math.random() < 0.5 ? -1 : 1;
         const yVel = Math.random()*3;
@@ -31,20 +31,19 @@ class PhysicsSimulation extends React.Component {
         const yPos = Math.random()*(height - 2*r) + r;
         const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
 
-        const res = [mass, xSign*xVel, ySign*yVel, r, xPos, yPos].map((v) => Math.floor(v));
-
-
-        return [...res, color];
+        return [mass, xSign*xVel, ySign*yVel, r, xPos, yPos, color];
     }
 
     _genInitVals(width, height) {
-        const amount = Math.random()*(10 - 2) + 2;
+        const amount = Math.random()*(10 - 7) + 7;
         const vals = []
         for (let i = 0; i < amount; i++) {
             const attr = this._genRandAttr(width, height);
             // FIXME: Redo this.
             vals.push(new Circle(attr[0], [attr[1], attr[2]], attr[3], [attr[4], attr[5]], attr[6]));
         }
+
+        console.log(vals);
 
         return vals;
     }
@@ -56,6 +55,7 @@ class PhysicsSimulation extends React.Component {
                 canvasWidth: width,
                 canvasHeight: height,
                 initVals: this._genInitVals(width, height)
+                //initVals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
             });
         }
     }
