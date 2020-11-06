@@ -4,15 +4,10 @@ import Engine from '../physics/engine.js';
 
 // A re-render of the canvas will cause it to start simulating with the new initial states.
 // A re-render of the canvas will cause it to start simulating with the new initial parameters.
-function useCanvasPhys(vals, onResize) {
+function useCanvasPhys(vals, onResize, settings) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        let animId;
-        const physEng = new Engine();
-
         function step(timestamp) {
             draw(ctx, vals);
             /* eslint-disable-next-line */ /* We want to reset on re-render.*/
@@ -20,11 +15,19 @@ function useCanvasPhys(vals, onResize) {
             animId = window.requestAnimationFrame(step);
         }
 
-        if (resize(canvas, ctx, onResize)) {
-            console.log('Resized canvas');
-        } else {
-            console.log('Did not resize canvas');
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        let animId;
+
+        resize(canvas, ctx, onResize);
+
+        const bounds = {
+            xMin: 0,
+            xMax: canvas.width,
+            yMin: 0,
+            yMax: canvas.height
         }
+        const physEng = new Engine(bounds, settings);
 
         window.requestAnimationFrame(step);
 
