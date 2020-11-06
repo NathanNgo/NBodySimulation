@@ -19,16 +19,13 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
-            // Detect boundary collisions.
+            // Detect boundary and handle boundaryt collisions.
             const boundarySide = isCollidingBoundary(vals[i], this.bounds);
-
-            // Handle boundary collision. Can probablly optimise by checking for no collision first.
             resolveBoundaryCollision(vals[i], boundarySide, this.settings);
 
-            // Detect object-object collision. We can optimise with spatial seperation later.
-            for (let j = i; j < vals.length; j++) {
+            // Detect and resolve object-object collisions.
+            for (let j = i + 1; j < vals.length; j++) {
                 if (isColliding(vals[i], vals[j])) {
-                    // Resolve collisions and change velocity.
                     resolveCollision(vals[i], vals[j], this.settings);
                 }
             }
