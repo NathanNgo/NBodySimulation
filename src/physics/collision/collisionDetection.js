@@ -39,8 +39,8 @@ function isCollidingBoundary(obj, bound) {
 function circleCircleCollision(obj1, obj2) {
     let distSqr = 0;
 
-    for (let i = 0; i < obj1.coordinates.length; i++) {
-        distSqr += (obj1.coordinates[i] - obj2.coordinates[i])**2;
+    for (let i = 0; i < obj1.coords.length; i++) {
+        distSqr += (obj1.coords[i] - obj2.coords[i])**2;
     }
 
     return distSqr <= (obj1.radius + obj2.radius)**2;
@@ -60,13 +60,13 @@ function polyPolyCollision(obj1, obj2) {
 }
 
 function circleBoundaryCollision(obj, bounds) {
-    if (obj.coordinates[0] - obj.radius <= bounds.xMin) {
+    if (obj.coords[0] - obj.radius <= bounds.xMin) {
         return 0;
-    } else if (obj.coordinates[0] + obj.radius >= bounds.xMax) {
+    } else if (obj.coords[0] + obj.radius >= bounds.xMax) {
         return 1;
-    } else if (obj.coordinates[1] - obj.radius <= bounds.yMin) {
+    } else if (obj.coords[1] - obj.radius <= bounds.yMin) {
         return 2;
-    } else if (obj.coordinates[1] + obj.radius >= bounds.yMax) {
+    } else if (obj.coords[1] + obj.radius >= bounds.yMax) {
         return 3;
     }
     return -1;
