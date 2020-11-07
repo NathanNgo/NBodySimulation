@@ -19,9 +19,9 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
-            // Detect boundary and handle boundaryt collisions.
+            // Detect boundary and handle boundary collisions.
             const boundarySide = isCollidingBoundary(vals[i], this.bounds);
-            resolveBoundaryCollision(vals[i], boundarySide, this.settings);
+            resolveBoundaryCollision(vals[i], boundarySide, this.bounds, this.settings);
 
             // Detect and resolve object-object collisions.
             for (let j = i + 1; j < vals.length; j++) {
@@ -30,10 +30,10 @@ class Engine {
                 }
             }
 
-            // Update velocity
+            // Move the objects by their velocities.
             if (vals[i] instanceof Circle) {
-                for (let c = 0; c < vals[i].coordinates.length; c++) {
-                    vals[i].coordinates[c] += vals[i].velocity[c];
+                for (let c = 0; c < vals[i].coords.length; c++) {
+                    vals[i].coords[c] += vals[i].velocity[c];
                 }
             }
         }
