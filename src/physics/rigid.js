@@ -12,13 +12,13 @@ class Circle extends RigidBody {
      * @param {number} mass - The mass of the circle.
      * @param {number[]} velocity - The velocity of the circle.
      * @param {number} radius - The radius of the circle.
-     * @param {numer[]} coordinates - The position of the circle.
+     * @param {numer[]} coords - The position of the circle.
      * @param {String} color - A hex string or value to represent color.
      */
-    constructor(mass, velocity, radius, coordinates, color) {
+    constructor(mass, velocity, radius, coords, color) {
         super(mass, velocity, color);
         this.radius = radius;
-        this.coordinates = coordinates;
+        this.coords = coords;
     }
 }
 
