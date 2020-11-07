@@ -55,7 +55,7 @@ class PhysicsSimulation extends React.Component {
                 canvasWidth: width,
                 canvasHeight: height,
                 initVals: this._genInitVals(width, height)
-                //initVals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
+                //initVals: [new Circle(1, [1, 0], 100, [200, 320], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
             });
         }
     }
