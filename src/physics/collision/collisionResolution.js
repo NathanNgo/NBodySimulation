@@ -2,13 +2,22 @@ import { vec2 as v } from 'gl-matrix';
 
 function resolveCollision(obj1, obj2, settings) {
     // TODO: Move circles away from each other first, so they don't stick. Find MPV.
+    _resetPositions(obj1, obj2, settings);
+    _calcNewVelocities(obj1, obj2, settings);
+}
 
+function _resetPositions(obj1, obj2, settings) {
+    const len = Math.sqrt((obj1.coords[0] - obj2.coords[0])**2 + (obj1.coords[1] - obj2.coords[1])**2);
+    const dist = (obj1.radius + obj2.radius - len)/2;
+    const pushVec2 = v.normalize([], v.sub([], obj2.coords, obj1.coords));
+    const pushVec1 = v.scale([], pushVec2, -1);
+    obj1.coords = v.add([], obj1.coords, v.scale([], pushVec1, dist));
+    obj2.coords = v.add([], obj2.coords, v.scale([], pushVec2, dist));
+}
+
+function _calcNewVelocities(obj1, obj2, settings) {
     /* Create the unit normal vector. */
-    const components = [
-        obj1.coordinates[0] - obj2.coordinates[0],
-        obj1.coordinates[1] - obj2.coordinates[1]
-    ];
-    const unitNorm = v.normalize([], v.fromValues(...components));
+    const unitNorm = v.normalize([], v.sub([], obj2.coords, obj1.coords));
 
     /* Convert veolcity array into vector object. */
     const obj1Vel = v.fromValues(obj1.velocity[0], obj1.velocity[1]);
@@ -34,22 +43,26 @@ function resolveCollision(obj1, obj2, settings) {
     obj2.velocity = v.add([], obj2Fin, obj2InitPerp);
 }
 
-function resolveBoundaryCollision(obj, boundarySide, settings) {
+function resolveBoundaryCollision(obj, boundarySide, boundVals, settings) {
     switch(boundarySide) {
         case 0:
             // xMin
+            obj.coords[0] = boundVals.xMin + obj.radius;
             obj.velocity[0] = -obj.velocity[0];
             break;
         case 1:
             // xMax
+            obj.coords[0] = boundVals.xMax - obj.radius;
             obj.velocity[0] = -obj.velocity[0];
             break;
         case 2:
             // yMin
+            obj.coords[1] = boundVals.yMin + obj.radius;
             obj.velocity[1] = -obj.velocity[1];
             break;
         case 3:
             // yMax
+            obj.coords[1] = boundVals.yMax - obj.radius;
             obj.velocity[1] = -obj.velocity[1];
             break;
         default:
