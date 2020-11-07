@@ -76,7 +76,6 @@ function polyBoundaryCollision(obj1, bound) {
     
 }
 
-
 /**
  * @desc Get the projectionn axes. These are the vectors normal to the polynomial edges.
  * @param {Polygon} obj - A Polygon to retrieve the axes of.
