@@ -28,12 +28,12 @@ function SideBar(props) {
         <div>
             <ClosablePanel title='Information'>
                 {/*<p> The <b>N Body Simulation</b> is designed to represent collisions and interactions between <span className='acc'>N</span> objects. </p>*/}
-                <h3 style={{marginBottom: '10px'}}> Refresh the page to obtain a new sample </h3>
                 <p>
                     A simple demonstration of a lightweight physics engine. Still a
                     <span className='acc'> work in progress </span> and very much incomplete.
-                    Eventually, the ability to customise the <span className='acc'>exact amount </span>
-                    of objects and their properties will be implemented.
+                </p>
+                <p style={{marginTop: '10px'}}>
+                    The ability to customise individual object properties and start/stop the animation have yet to be implemented.
                 </p>
             </ClosablePanel>
             {/*<ClosablePanel title='Controls'>
