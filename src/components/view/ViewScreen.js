@@ -5,8 +5,8 @@ function ViewScreen(props) {
     return (
         <div className='containerViewScreen'>
             <CanvasPhys
-                vals={props.initVals}
-                onResize={props.onResize}
+                vals={props.vals}
+                onRender={props.onRender}
                 settings={props.settings}
             />
         </div>
