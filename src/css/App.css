@@ -167,7 +167,6 @@ a:hover {
 /* PANEL STYLE */
 .containerPanel {
     margin: 10px;
-    text-align: center;
 }
 
 .panelHeaderOpen {
@@ -250,6 +249,7 @@ a:hover {
 
 /* FORMS */
 form {
+    text-align: center;
     align-items: center;
 }
 
