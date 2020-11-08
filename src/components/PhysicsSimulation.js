@@ -9,14 +9,17 @@ class PhysicsSimulation extends React.Component {
         super(props);
 
         this.state = {
-            initVals: [],
+            vals: [],
             settings: undefined,
-            canvasHasResized: false,
             canvasWidth: undefined,
-            canvasHeight: undefined
+            canvasHeight: undefined,
+            canvasHasRendered: false,
+            aninIsPlaying: true,
         }
 
-        this.handleCanvasResize = this.handleCanvasResize.bind(this);
+        this.handleCanvasRender = this.handleCanvasRender.bind(this);
+        this.handleAnimToggle = this.handleAnimToggle.bind(this);
+        this.handleOptionsChange = this.handleOptionsChange.bind(this);
     }
 
 
