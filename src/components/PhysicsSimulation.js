@@ -34,37 +34,74 @@ class PhysicsSimulation extends React.Component {
         const yPos = Math.random()*(height - 2*r) + r;
         const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
 
-        return [mass, xSign*xVel, ySign*yVel, r, xPos, yPos, color];
+        return {
+            mass,
+            xVel: xSign*xVel,
+            yVel: ySign*yVel,
+            r,
+            xPos,
+            yPos,
+            color
+        }
     }
 
-    _genInitVals(width, height) {
-        const amount = Math.random()*(20 - 8) + 8;
+    _genVals(width, height, amount) {
+        if (!amount) {
+            amount = Math.floor(Math.random()*(20 - 8) + 8);
+        }
         const vals = []
         for (let i = 0; i < amount; i++) {
-            const attr = this._genRandAttr(width, height);
-            // FIXME: Redo this.
-            vals.push(new Circle(attr[0], [attr[1], attr[2]], attr[3], [attr[4], attr[5]], attr[6]));
+            const att = this._genRandAttr(width, height);
+            vals.push(new Circle(att.mass, [att.xVel, att.yVel], att.r, [att.xPos, att.yPos], att.color));
         }
 
-        console.log(vals);
-
-        return vals;
+        return { vals, amount };
     }
 
-    handleCanvasResize(width, height) {
-        if (!this.state.canvasHasResized) {
+    handleCanvasRender(width, height) {
+        if (!this.state.canvasHasRendered) {
+            const { vals, amount } = this._genVals(width, height);
             this.setState({
-                canvasHasResized: true,
+                canvasHasRendered: true,
                 canvasWidth: width,
                 canvasHeight: height,
-                initVals: this._genInitVals(width, height)
-                //initVals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
-                //initVals: [new Circle(1, [1, 1], 100, [0, 0], 'green')]
+                vals: vals,
+                settings: { amount }
+                //vals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
+                //vals: [new Circle(1, [1, 1], 100, [0, 0], 'green')]
             });
         }
     }
 
+    handleAnimToggle(animIsPlaying) {
+        this.setState({ animIsPlaying });
+    }
+
+    handleOptionsChange(vals, settings) {
+        // this.setState({ vals, settings });
+        /* Just have it generate new values for now. Implement altering the existing values later */
+        const { vals: newVals } = this._genVals(this.state.canvasWidth, this.state.canvasHeight, settings.amount);
+        console.log(newVals);
+        this.setState({ vals: newVals, settings });
+    }
+
     render() {
+        let sideBar;
+        if (this.state.canvasHasRendered) {
+            sideBar =
+                <SideBar
+                    vals={this.state.vals}
+                    canvasWidth={this.state.canvasWidth}
+                    canvasHeight={this.state.canvasHeight}
+                    settings={this.state.settings}
+                    animIsPlaying={this.state.animIsPlaying}
+                    onAnimToggle={this.handleAnimToggle}
+                    onOptionsChange={this.handleOptionsChange}
+                />;
+        } else {
+            sideBar = <h2> Loading... </h2>;
+        }
+
         return (
             <div className='containerMain'>
                 <header className='header'>
@@ -72,17 +109,17 @@ class PhysicsSimulation extends React.Component {
                     <h1> <span className='acc'> Physics Simulation </span> </h1>
                 </header>
                 <section className='sideBar'>
-                    {this.state.canvasHasResized ? <SideBar /> : <h2> Loading... </h2>}
+                    {sideBar}
                 </section>
                 <section className='viewScreen'>
                     <ViewScreen
-                        initVals={this.state.initVals}
-                        onResize={this.handleCanvasResize}
+                        vals={this.state.vals}
+                        onRender={this.handleCanvasRender}
                         settings={this.settings}
                     />
                 </section>
                 <footer className='footer'>
-                    <p> <a href='https://github.com/NathanNgo/NBodySimulation'> GitHub </a> </p>
+                    <p> <a href='https://github.com/NathanNgo/PhysicsSimulation'> GitHub </a> </p>
                 </footer>
             </div>
         );
