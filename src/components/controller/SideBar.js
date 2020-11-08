@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ClosablePanel } from './ClosablePanel';
 import { Button } from './input/Button';
 import playIcon from '../../css/icons/play_arrow-24px.svg';
 import pauseIcon from '../../css/icons/pause-24px.svg';
 import resetIcon from '../../css/icons/reset-24px.svg';
 
-function SideBar() {
+function SideBar(props) {
+    const [vals, setVals] = useState(props.vals)
+    const [settings, setSettings] = useState(props.settings);
+
+    function handleSubmit(event) {
+        props.onOptionsChange(vals, settings);
+        event.preventDefault();
+    }
+
+    function handleValsChange(event) {
+        const newVals = { [event.target.name]: event.target.value };
+        setVals({ ...vals, ...newVals });
+    }
+
+    function handleSettingsChange(event) {
+        const newSettings = { [event.target.name]: event.target.value };
+        setSettings({ ...settings, ...newSettings });
+    }
+
     return (
         <div>
             <ClosablePanel title='Information'>
@@ -36,7 +54,13 @@ function SideBar() {
                 />
             </ClosablePanel>
             <ClosablePanel title='Options'>
-                <p> Options go here </p>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Amount of Objects
+                        <input name='amount' type='number' value={settings.amount} onChange={handleSettingsChange} />
+                    </label>
+                    <input type='submit' value="Update" />
+                </form>
             </ClosablePanel>
         </div>
     );
