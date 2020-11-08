@@ -15,6 +15,10 @@
     --playButtonColor: /*#00E676;*/ #28a745;
     --pauseButtonColor: /*#00B0FF;*/ #007bff;
     --resetButtonColor: /*#FF1744;*/ #dc3545;
+
+    /* SCROLLBAR COLORS */
+    --scrollMain: /*#358f77;*/#1c4f41;
+    --scrollHover: #276b59;
 }
 
 /* FONTS */
@@ -38,7 +42,7 @@ div#root {
     height: 100%;
 }
 
-p, h1, h2, h3 {
+p, h1, h2, h3, label {
     margin: 0;
     color: var(--mainText);
 }
@@ -76,6 +80,25 @@ canvas {
     color: var(--accentText);
 }
 
+/* SCROLLBAR */
+*::-webkit-scrollbar {
+      width: 12px;               /* width of the entire scrollbar */
+      height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: var(--headerBackgroundColor);        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scrollMain);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid var(--headerBackgroundColor);  /* creates padding around scroll thumb */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollHover);
+}
 
 /* LINKS */
 /* FIXME: Yellow looks terrible. */
@@ -110,6 +133,7 @@ a:hover {
 .sideBar {
     background-color: var(--sideBackgroundColor);
     min-width: 200px;
+    overflow: auto;
     grid-column: 1 / 7;
     grid-row: 2 / 24;
 }
