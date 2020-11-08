@@ -15,6 +15,9 @@
     --playButtonColor: /*#00E676;*/ #28a745;
     --pauseButtonColor: /*#00B0FF;*/ #007bff;
     --resetButtonColor: /*#FF1744;*/ #dc3545;
+    --updateButtonColor: #04946f;
+    --updateButtonHover: #017650;
+    --updateButtonPressed: #046352;
 
     /* SCROLLBAR COLORS */
     --scrollMain: /*#358f77;*/#1c4f41;
@@ -42,7 +45,7 @@ div#root {
     height: 100%;
 }
 
-p, h1, h2, h3, label {
+p, h1, h2, h3, label, input {
     margin: 0;
     color: var(--mainText);
 }
@@ -78,6 +81,19 @@ canvas {
 .acc {
     /* color: #0129c6; */
     color: var(--accentText);
+}
+
+/* REMOVE ARROWS ON NUMBER INPUTS */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }
 
 /* SCROLLBAR */
@@ -230,4 +246,47 @@ a:hover {
     min-height: 0px;
     min-width: 0px;
     background-color: transparent;
+}
+
+/* FORMS */
+form {
+    align-items: center;
+}
+
+form label {
+    margin-right: 10px;
+}
+
+form input[type=number] {
+    background-color: var(--mainBackgroundColor);
+    border: solid;
+    border-color: var(--accentText);
+    border-width: 2px;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+form input[type=submit] {
+    display: block;
+    margin: 15px auto 5px auto;
+    width: 100px;
+    min-width: 58px;
+    min-height: 36px;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    background-color: var(--updateButtonColor);
+}
+
+form input[type=submit]:hover {
+    background-color: var(--updateButtonHover);
+}
+
+form input[type=submit]:active {
+    background-color: var(--updateButtonPressed);
 }
