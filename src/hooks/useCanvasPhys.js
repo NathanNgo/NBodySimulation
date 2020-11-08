@@ -4,7 +4,7 @@ import Engine from '../physics/engine.js';
 
 // A re-render of the canvas will cause it to start simulating with the new initial states.
 // A re-render of the canvas will cause it to start simulating with the new initial parameters.
-function useCanvasPhys(vals, onResize, settings) {
+function useCanvasPhys(vals, onRender, settings) {
     const canvasRef = useRef(null);
 
     useEffect(() => {
@@ -19,7 +19,8 @@ function useCanvasPhys(vals, onResize, settings) {
         const ctx = canvas.getContext('2d');
         let animId;
 
-        resize(canvas, ctx, onResize);
+        const { width, height } = resize(canvas, ctx);
+        onRender(width, height);
 
         const bounds = {
             xMin: 0,
@@ -39,7 +40,7 @@ function useCanvasPhys(vals, onResize, settings) {
     return canvasRef;
 }
 
-function resize(canvas, ctx, onResize) {
+function resize(canvas, ctx) {
     const { width, height } = canvas.getBoundingClientRect();
     const ratio = window.devicePixelRatio;
 
@@ -47,11 +48,9 @@ function resize(canvas, ctx, onResize) {
         canvas.width = width*ratio;
         canvas.height = height*ratio;
         ctx.scale(ratio, ratio);
-        onResize(canvas.width, canvas.height);
-        return true;
     }
 
-    return false;
+    return { width: canvas.width, height: canvas.height };
 }
 
 export default useCanvasPhys;
