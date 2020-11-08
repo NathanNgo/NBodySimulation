@@ -36,7 +36,7 @@ function SideBar(props) {
                     of objects and their properties will be implemented.
                 </p>
             </ClosablePanel>
-            <ClosablePanel title='Controls'>
+            {/*<ClosablePanel title='Controls'>
                 <Button
                     className='playButton'
                     iconURL={playIcon}
@@ -52,13 +52,13 @@ function SideBar(props) {
                     iconURL={resetIcon}
                     //onClick=...
                 />
-            </ClosablePanel>
+            </ClosablePanel>*/}
             <ClosablePanel title='Options'>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Amount of Objects
-                        <input name='amount' type='number' value={settings.amount} onChange={handleSettingsChange} />
                     </label>
+                        <input name='amount' type='number' value={settings.amount} onChange={handleSettingsChange} />
                     <input type='submit' value="Update" />
                 </form>
             </ClosablePanel>
