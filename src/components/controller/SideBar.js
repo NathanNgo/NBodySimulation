@@ -26,7 +26,7 @@ function SideBar(props) {
 
     return (
         <div>
-            <ClosablePanel title='Information'>
+            <ClosablePanel title='Information' open={true}>
                 {/*<p> The <b>N Body Simulation</b> is designed to represent collisions and interactions between <span className='acc'>N</span> objects. </p>*/}
                 <p>
                     A simple demonstration of a lightweight physics engine. Still a
@@ -53,7 +53,7 @@ function SideBar(props) {
                     //onClick=...
                 />
             </ClosablePanel>*/}
-            <ClosablePanel title='Options'>
+            <ClosablePanel title='Options' open={true}>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Amount of Objects
