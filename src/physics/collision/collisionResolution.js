@@ -1,7 +1,6 @@
 import { vec2 as v } from 'gl-matrix';
 
 function resolveCollision(obj1, obj2, settings) {
-    // TODO: Move circles away from each other first, so they don't stick. Find MPV.
     _resetPositions(obj1, obj2, settings);
     _calcNewVelocities(obj1, obj2, settings);
 }
