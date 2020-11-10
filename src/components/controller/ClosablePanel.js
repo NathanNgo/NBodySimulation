@@ -1,42 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from './input/Button';
-import chevDown from '../../css/icons/chevDown24dp.svg';
 import chevRight from '../../css/icons/chevRight24dp.svg';
 
 function ClosablePanel(props) {
-    const [ isOpen, setIsOpen ] = useState(true);
-    const iconURL = isOpen ? chevDown : chevRight;
+    const [ isOpen, setIsOpen ] = useState(props.open);
+    const [ rendered, setRendered ] = useState(false);
+    const panelBody = useRef(null);
 
-    if (isOpen) {
-        return (
-            <div className='containerPanel'>
-                <div className='panelHeaderOpen'>
-                    <h2> { props.title } </h2>
-                    <Button
-                        className='chevronButton'
-                        iconURL={iconURL}
-                        onClick={ () => setIsOpen(!isOpen) }
-                    />
-                </div>
+    const panelHeader = isOpen ? 'panelHeader headerOpen' : 'panelHeader headerClosed';
+    const chev = isOpen ? 'chevOpen' : 'chevClosed';
+    const maxHeight = rendered && isOpen ? `${panelBody.current.scrollHeight}px` : '0';
+
+    useEffect(() => {
+        setRendered(true);
+    }, []);
+
+    function togglePanel() {
+        setIsOpen(!isOpen);
+    }
+
+    return (
+        <div className='containerPanel'>
+            <button className={panelHeader} onClick={togglePanel} >
+                <h2> { props.title } </h2>
+                <img className={chev} src={chevRight} alt='Chevron'/>
+            </button>
+            <div ref={panelBody} className='panelBody' style={{ maxHeight }}>
                 <div className='panelSeperator' />
-                <div className='panelBody'>
+                <div className='panelContent'>
                     { props.children }
                 </div>
             </div>
-        );
-    }
-
-    // Use CSS to hide to panel, don't remove the HTML. Just attached a
-    // class selector.
-    return (
-        <div className='containerPanel panelHeaderClosed'>
-            <h2> { props.title } </h2>
-            <Button
-                className='chevronButton'
-                iconURL={iconURL}
-                onClick={ () => setIsOpen(!isOpen) }
-            />
         </div>
     );
 }
