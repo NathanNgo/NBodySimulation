@@ -51,21 +51,21 @@ class PhysicsSimulation extends React.Component {
         }
         const vals = []
         for (let i = 0; i < amount; i++) {
-            const att = this._genRandAttr(width, height);
-            vals.push(new Circle(att.mass, [att.xVel, att.yVel], att.r, [att.xPos, att.yPos], att.color));
+            vals.push(new Circle(this._genRandAttr(width, height)));
         }
 
-        return { vals, amount };
+        return vals;
     }
 
     handleCanvasRender(width, height) {
         if (!this.state.canvasHasRendered) {
-            const { vals, amount } = this._genVals(width, height);
+            const amount = Math.floor(Math.random()*(20 - 8) + 8);
+
             this.setState({
                 canvasHasRendered: true,
                 canvasWidth: width,
                 canvasHeight: height,
-                vals: vals,
+                vals: this._genVals(width, height, amount),
                 settings: { amount }
                 //vals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
                 //vals: [new Circle(1, [1, 1], 100, [0, 0], 'green')]
@@ -80,8 +80,8 @@ class PhysicsSimulation extends React.Component {
     handleOptionsChange(vals, settings) {
         // this.setState({ vals, settings });
         /* Just have it generate new values for now. Implement altering the existing values later */
-        const { vals: newVals } = this._genVals(this.state.canvasWidth, this.state.canvasHeight, settings.amount);
-        console.log(newVals);
+        const { canvasWidth, canvasHeight } = this.state;
+        const newVals = this._genVals(canvasWidth, canvasHeight, settings.amount);
         this.setState({ vals: newVals, settings });
     }
 
