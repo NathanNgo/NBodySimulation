@@ -6,6 +6,8 @@ function resolveCollision(obj1, obj2, settings) {
 }
 
 function _resetPositions(obj1, obj2, settings) {
+    // TODO: Separate the objects based on a ratio of mass difference rather than by equal amounts.
+    // Currently, both objects get moved the same amount, regardless of mass.
     const len = Math.sqrt((obj1.coords[0] - obj2.coords[0])**2 + (obj1.coords[1] - obj2.coords[1])**2);
     const dist = (obj1.radius + obj2.radius - len)/2;
     const pushVec2 = v.normalize([], v.sub([], obj2.coords, obj1.coords));
