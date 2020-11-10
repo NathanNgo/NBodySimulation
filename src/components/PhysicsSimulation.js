@@ -25,23 +25,23 @@ class PhysicsSimulation extends React.Component {
 
     _genRandAttr(width, height) {
         const mass = Math.random()*(5 - 1) + 1;
-        const r = Math.random()*(60 - 10) + 10;
+        const radius = Math.random()*(60 - 10) + 10;
         const xVel = Math.random()*3;
         const xSign = Math.random() < 0.5 ? -1 : 1;
         const yVel = Math.random()*3;
         const ySign = Math.random() < 0.5 ? -1 : 1;
-        const xPos = Math.random()*(width - 2*r) + r;
-        const yPos = Math.random()*(height - 2*r) + r;
+        const xPos = Math.random()*(width - 2*radius) + radius;
+        const yPos = Math.random()*(height - 2*radius) + radius;
         const color = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
 
         return {
             mass,
-            xVel: xSign*xVel,
-            yVel: ySign*yVel,
-            r,
-            xPos,
-            yPos,
-            color
+            velocity: [xSign*xVel, ySign*yVel],
+            color,
+            active: true,
+            cor: 1,
+            radius,
+            coords: [xPos, yPos]
         }
     }
 
