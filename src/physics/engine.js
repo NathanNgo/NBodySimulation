@@ -1,12 +1,14 @@
 import { RigidBody, Circle, Polygon } from './rigid';
 import { isColliding, isCollidingBoundary } from './collision/collisionDetection';
 import { resolveCollision, resolveBoundaryCollision } from './collision/collisionResolution';
+import { vec2 as v } from 'gl-matrix';
 
 class Engine {
     /**
      * @constructs Creates an instance of the Engine.
      * @param {number[]} bounds - Array of integers representing boundaries of simulation.
-     * @param {Object} settings - An object conitaning Engine settings such as graivty and etc.
+     * @param {Object} settings - An object conitanin
+     * Engine settings such as graivty and etc.
      */
     constructor(bounds, settings) {
         this.bounds = bounds;
@@ -19,7 +21,7 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
-            // Detect boundary and handle boundary collisions.
+            // Detect and handle object-boundary collisions.
             const boundarySide = isCollidingBoundary(vals[i], this.bounds);
             resolveBoundaryCollision(vals[i], boundarySide, this.bounds, this.settings);
 
@@ -29,6 +31,11 @@ class Engine {
                     resolveCollision(vals[i], vals[j], this.settings);
                 }
             }
+
+            // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
+            // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
+            // implement "sleeping" system, otherwise we have too many collision resolutions calls.
+            /* vals[i].velocity = v.add([], vals[i].velocity, [this.settings.gravX, this.settings.gravY]); */
 
             // Move the objects by their velocities.
             if (vals[i] instanceof Circle) {
