@@ -2,6 +2,7 @@ import React from 'react';
 import { SideBar } from './controller/SideBar';
 import { ViewScreen } from './view/ViewScreen';
 import { Circle } from '../physics/rigid';
+import Modal from './controller/Modal';
 
 // The "actual" root component.
 class PhysicsSimulation extends React.Component {
@@ -10,19 +11,35 @@ class PhysicsSimulation extends React.Component {
 
         this.state = {
             vals: [],
-            settings: undefined,
+            // Settings is maintained a 2 different values instead of a single vector to avoid
+            // the need to deep clone the settings objects.
+            settings: {
+                amount: 0,
+                gravX: 0,
+                gravY: 0,
+                cor: 1,
+            },
             canvasWidth: undefined,
             canvasHeight: undefined,
             canvasHasRendered: false,
             aninIsPlaying: true,
+            valSelected: null,
+            modalOpen: false,
         }
 
         this.handleCanvasRender = this.handleCanvasRender.bind(this);
         this.handleAnimToggle = this.handleAnimToggle.bind(this);
-        this.handleOptionsChange = this.handleOptionsChange.bind(this);
+        this.handleSettingsSubmit = this.handleSettingsSubmit.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this);
+        this.handleModalOpen = this.handleModalOpen.bind(this);
     }
 
-
+    /**
+     * Generates random attributes for a Circle Object.
+     * @params {number} width - The max width of the Canvas.
+     * @params {number} height - The max height of the Canvas.
+     * @returns {Object} An object containing all the random attributes for a Circle.
+     */
     _genRandAttr(width, height) {
         const mass = Math.random()*(5 - 1) + 1;
         const radius = Math.random()*(60 - 10) + 10;
@@ -45,10 +62,14 @@ class PhysicsSimulation extends React.Component {
         }
     }
 
+    /**
+     * Generates an array of random Circle objects.
+     * @params {number} width - The max width of the Canvas.
+     * @params {number} height - The max height of the Canvas.
+     * @params {number} amount - The number of Circle objects to generate.
+     * @returns {Circle[]} An array containing all randomly generated Circle objects.
+     */
     _genVals(width, height, amount) {
-        if (!amount) {
-            amount = Math.floor(Math.random()*(20 - 8) + 8);
-        }
         const vals = []
         for (let i = 0; i < amount; i++) {
             vals.push(new Circle(this._genRandAttr(width, height)));
@@ -61,15 +82,13 @@ class PhysicsSimulation extends React.Component {
         if (!this.state.canvasHasRendered) {
             const amount = Math.floor(Math.random()*(20 - 8) + 8);
 
-            this.setState({
+            this.setState((state) => ({
                 canvasHasRendered: true,
                 canvasWidth: width,
                 canvasHeight: height,
                 vals: this._genVals(width, height, amount),
-                settings: { amount }
-                //vals: [new Circle(1, [1, 0], 100, [200, 300], 'green'), new Circle(1, [-1, 0], 100, [600, 200], 'red')]
-                //vals: [new Circle(1, [1, 1], 100, [0, 0], 'green')]
-            });
+                settings: { ...state.settings, amount }
+            }));
         }
     }
 
@@ -77,12 +96,20 @@ class PhysicsSimulation extends React.Component {
         this.setState({ animIsPlaying });
     }
 
-    handleOptionsChange(vals, settings) {
+    handleSettingsSubmit(settings) {
         // this.setState({ vals, settings });
         /* Just have it generate new values for now. Implement altering the existing values later */
         const { canvasWidth, canvasHeight } = this.state;
         const newVals = this._genVals(canvasWidth, canvasHeight, settings.amount);
         this.setState({ vals: newVals, settings });
+    }
+
+    handleModalClose() {
+        this.setState({ valSelected: null, modalOpen: false });
+    }
+
+    handleModalOpen(val) {
+        this.setState({ valSelected: val, modalOpen: true });
     }
 
     render() {
@@ -96,7 +123,7 @@ class PhysicsSimulation extends React.Component {
                     settings={this.state.settings}
                     animIsPlaying={this.state.animIsPlaying}
                     onAnimToggle={this.handleAnimToggle}
-                    onOptionsChange={this.handleOptionsChange}
+                    onSettingsSubmit={this.handleSettingsSubmit}
                 />;
         } else {
             sideBar = <h2> Loading... </h2>;
@@ -105,22 +132,25 @@ class PhysicsSimulation extends React.Component {
         return (
             <div className='containerMain'>
                 <header className='header'>
-                    {/*<h1> <span className='acc'>N Body Simulation (Work In Progress)</span> </h1>*/}
                     <h1> <span className='acc'> Physics Simulation </span> </h1>
                 </header>
                 <section className='sideBar'>
                     {sideBar}
+                    {/*<button onClick={this.handleModalOpen}> Open </button>*/}
                 </section>
                 <section className='viewScreen'>
                     <ViewScreen
                         vals={this.state.vals}
                         onRender={this.handleCanvasRender}
-                        settings={this.settings}
+                        settings={this.state.settings}
                     />
                 </section>
                 <footer className='footer'>
                     <p> <a href='https://github.com/NathanNgo/PhysicsSimulation'> GitHub </a> </p>
                 </footer>
+                <Modal isOpen={this.state.modalOpen} onClose={this.handleModalClose} >
+                    <p> This is some content for the model </p>
+                </Modal>
             </div>
         );
     }
