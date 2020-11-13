@@ -2,7 +2,7 @@ import { Circle, Polygon } from '../rigid';
 import { vec2 } from 'gl-matrix';
 
 /**
- * Determines if 2 RigidBody objects are colliding.
+ * Determines the type of the 2 objects and checks if they're colliding.
  * @param {RigidBody} obj1 - The first RigidBody.
  * @param {RigidBody} obj2 - The second RigidBody.
  * @returns {boolean} Value representing if a collision occured.
@@ -23,19 +23,11 @@ function isColliding(obj1, obj2) {
 }
 
 /**
- * Determines if an object is colliding with the screens boundary.
- * @param {RigidBody} obj - The RigidBody we are testing for collision.
- * @param {Object} bound - An object containing the boundaries.
- * @returns {number} An integer representing the boundary of collision. -1 if no collision.
+ * Handles the case where 2 Circle objects might be colliding.
+ * @params {Circle} obj1 - The first Circle object.
+ * @params {Circle} obj2 - The second Circle object.
+ * @returns {boolean} True if colliding, false otherwise.
  */
-function isCollidingBoundary(obj, bound) {
-    const isCircle = obj instanceof Circle ? true : false;
-    
-    if (isCircle) {
-        return circleBoundaryCollision(obj, bound);
-    }
-}
-
 function circleCircleCollision(obj1, obj2) {
     let distSqr = 0;
 
@@ -47,18 +39,38 @@ function circleCircleCollision(obj1, obj2) {
 }
 
 function circlePolyCollision(obj1, obj2) {
-    // Deal with polygon-circle.
+    // TODO: Deal with polygon-circle.
     // Vertices for polygon.
     return null;
 }
 
 function polyPolyCollision(obj1, obj2) {
-    // Polygon-polygon.
+    // TODO: Polygon-polygon.
     //const axes1 = getAxes(obj1);
     //const axes2 = getAxes(obj2);
     return null;
 }
 
+/**
+ * Determines the type of an object and checks if it's colliding with a boundary.
+ * @param {RigidBody} obj - The RigidBody we are testing for collision.
+ * @param {Object} bound - An object containing the boundaries.
+ * @returns {number} An integer representing the boundary of collision. -1 if no collision.
+ */
+function isCollidingBoundary(obj, bound) {
+    const isCircle = obj instanceof Circle ? true : false;
+
+    if (isCircle) {
+        return circleBoundaryCollision(obj, bound);
+    }
+}
+
+/**
+ * Handles the case where a Circle might be colliding with a boundary.
+ * @param {Circle} obj - A circle object.
+ * @param {Object} bounds - An object containing the boundary line values.
+ * @returns {number} Represents which boundary a collision occured with. -1 if not collision.
+ */
 function circleBoundaryCollision(obj, bounds) {
     if (obj.coords[0] - obj.radius <= bounds.xMin) {
         return 0;
@@ -73,11 +85,11 @@ function circleBoundaryCollision(obj, bounds) {
 }
 
 function polyBoundaryCollision(obj1, bound) {
-    
+    // TODO: Polygon-boundary.
 }
 
 /**
- * @desc Get the projectionn axes. These are the vectors normal to the polynomial edges.
+ * @desc Get the projection axes. These are the vectors normal to the polynomial edges.
  * @param {Polygon} obj - A Polygon to retrieve the axes of.
  * @returns A list of vectors that have not be normalized to unit vectors.
  */
