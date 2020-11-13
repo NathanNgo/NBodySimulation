@@ -2,8 +2,13 @@ import { useRef, useEffect } from 'react';
 import draw from '../render/render.js';
 import Engine from '../physics/engine.js';
 
-// A re-render of the canvas will cause it to start simulating with the new initial states.
-// A re-render of the canvas will cause it to start simulating with the new initial parameters.
+/**
+ * A hook that sets up a Canvas element to use the Physics engine.
+ * @params {RigidBody[]} vals - An array of RigidBody objects.
+ * @params {Callback} onRender - Callback function used to set Width and Height after Canvas element has rendered.
+ * @params {Object} settings - Global parameters the engine should apply.
+ * @returns {ref} A React ref that is attached to the Canvas element.
+ */
 function useCanvasPhys(vals, onRender, settings) {
     const canvasRef = useRef(null);
 
@@ -19,7 +24,7 @@ function useCanvasPhys(vals, onRender, settings) {
         const ctx = canvas.getContext('2d');
         let animId;
 
-        const { width, height } = resize(canvas, ctx);
+        const { width, height } = resize(canvas);
         onRender(width, height);
 
         const bounds = {
@@ -40,7 +45,13 @@ function useCanvasPhys(vals, onRender, settings) {
     return canvasRef;
 }
 
-function resize(canvas, ctx) {
+/**
+ * Correctly scales the Canvas element so that it works with the CSS scaling.
+ * @params {Object} canvas - The Canvas object representing the Canvas element.
+ * @returns {Object} An objects containing the width and height.
+ */
+function resize(canvas) {
+    const ctx = canvas.getContext('2d');
     const { width, height } = canvas.getBoundingClientRect();
     const ratio = window.devicePixelRatio;
 
