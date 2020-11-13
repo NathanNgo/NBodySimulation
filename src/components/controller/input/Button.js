@@ -9,7 +9,7 @@ function Button(props) {
             onClick={props.onClick}
         >
             <div className='buttonValues'>
-                <img src ={props.iconURL} />
+                <img src={props.iconURL} />
                 { props.children }
             </div>
         </button>
@@ -23,4 +23,4 @@ Button.propTypes = {
     onClick: PropTypes.func.isRequired
 }
 
-export { Button };
+export default Button;
