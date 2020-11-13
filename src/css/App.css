@@ -2,12 +2,15 @@
 
 /* VARIABLES */
 :root {
-    --mainBackgroundColor: #021018;/*#f5f5f4;*/
+    --mainBackgroundColor: #021018;
     /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
     --headerBackgroundColor: #072232;/*#02131c;*//*#021c2b;*/
     --sideBackgroundColor: #021c2b;/*#02131c;*/
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
+    --secondAccentText: /*#6e110a;*/#79140c;
+
+    /* PANEL COLORS */
     --panelColor: #093047;
     --panelHeaderColor: #0a4161;
     --panelHover: #0a3954;
@@ -23,6 +26,10 @@
     /* SCROLLBAR COLORS */
     --scrollMain: /*#358f77;*/#1c4f41;
     --scrollHover: #276b59;
+
+    /* MODAL COLORS */
+    --modalMain: var(--panelColor);
+    --modalControls: var(--panelHeaderColor);
 }
 
 /* FONTS */
@@ -243,6 +250,7 @@ a:hover {
     cursor: pointer;
     outline: none;
     position: relative;
+    color: var(--mainText);
 }
 
 .buttonValues {
@@ -264,6 +272,12 @@ a:hover {
     background-color: var(--resetButtonColor);
 }
 
+.modalButton {
+    width: 80px;
+    height: 40px;
+    background-color: var(--secondAccentText);
+}
+
 /* FORMS */
 form {
     text-align: center;
@@ -271,7 +285,9 @@ form {
 }
 
 form label {
-    margin-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
 }
 
 form input[type=number] {
@@ -306,4 +322,65 @@ form input[type=submit]:hover {
 
 form input[type=submit]:active {
     background-color: var(--updateButtonPressed);
+}
+
+/* MODAL */
+.modalBackground {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s ease;
+    /*background: rgba(0, 0, 0, 0.6);*/
+    /*background: rgba(255, 255, 255, 0.2);*/
+    background: rgba(169, 169, 169, 0.2);
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    height: 60%;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 50px;
+    transition: all 0.4s ease;
+    -webkit-box-shadow: 4px 6px 7px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow:    4px 6px 7px 0px rgba(0, 0, 0, 0.75);
+    box-shadow:         4px 6px 7px 0px rgba(0, 0, 0, 0.75);
+}
+
+.modalContent {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 4px solid var(--sideBackgroundColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row: 1/2;
+    background-color: var(--modalMain);
+    transform: translateY(2px);
+}
+
+.modalControl {
+    width: 100%;
+    height: 100%;
+    grid-row: 2/3;
+    border-radius: 0 0 10px 10px;
+    background-color: var(--modalControls);
+    transform: translateY(1px);
+}
+
+.modelOpen {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modalClosed {
+    visibility: hidden;
+    opacity: 0;
 }
