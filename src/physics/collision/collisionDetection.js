@@ -54,14 +54,12 @@ function polyPolyCollision(obj1, obj2) {
 /**
  * Determines the type of an object and checks if it's colliding with a boundary.
  * @param {RigidBody} obj - The RigidBody we are testing for collision.
- * @param {Object} bound - An object containing the boundaries.
+ * @param {Object} bounds - An object containing the boundaries.
  * @returns {number} An integer representing the boundary of collision. -1 if no collision.
  */
-function isCollidingBoundary(obj, bound) {
-    const isCircle = obj instanceof Circle ? true : false;
-
-    if (isCircle) {
-        return circleBoundaryCollision(obj, bound);
+function isCollidingBoundary(obj, bounds) {
+    if (obj instanceof Circle) {
+        return circleBoundaryCollision(obj, bounds);
     }
 }
 
@@ -69,19 +67,27 @@ function isCollidingBoundary(obj, bound) {
  * Handles the case where a Circle might be colliding with a boundary.
  * @param {Circle} obj - A circle object.
  * @param {Object} bounds - An object containing the boundary line values.
- * @returns {number} Represents which boundary a collision occured with. -1 if not collision.
+ * @returns {number[]} An array containing all boundaries the circle collided with.
  */
-function circleBoundaryCollision(obj, bounds) {
+// TODO: Rework the function to accept a SINGLE boundary rather than all of them.
+// Return true if the circle collides with that single boundary. Return false otherwise.
+function circleBoundaryCollision(obj, bounds, isMin) {
+    const sides = [];
+
     if (obj.coords[0] - obj.radius <= bounds.xMin) {
-        return 0;
-    } else if (obj.coords[0] + obj.radius >= bounds.xMax) {
-        return 1;
-    } else if (obj.coords[1] - obj.radius <= bounds.yMin) {
-        return 2;
-    } else if (obj.coords[1] + obj.radius >= bounds.yMax) {
-        return 3;
+        sides.push(0);
     }
-    return -1;
+    if (obj.coords[0] + obj.radius >= bounds.xMax) {
+        sides.push(1);
+    }
+    if (obj.coords[1] - obj.radius <= bounds.yMin) {
+        sides.push(2);
+    }
+    if (obj.coords[1] + obj.radius >= bounds.yMax) {
+        sides.push(3);
+    }
+
+    return sides;
 }
 
 function polyBoundaryCollision(obj1, bound) {
