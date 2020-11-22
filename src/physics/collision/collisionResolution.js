@@ -82,35 +82,37 @@ function _calcVelocity(cor, vel1, mass1, vel2, mass2) {
 /**
  * Resolves a collision between an object and a boundary.
  * @param {RigidBody} obj1 - The first object to resolve.
- * @param {number} boundarySide - A number representing the boundary we collided with.
- * @param {Object} boundVals - An object containing the boundary line values.
+ * @param {number} sides - An object containing all boundaries the object collided with.
+ * @param {Object} bounds - An object containing the boundary line values.
  * @param {Object} settings - Global parameters the engine should apply.
  */
-function resolveBoundaryCollision(obj, boundarySide, boundVals, settings) {
-    switch(boundarySide) {
-        case 0:
-            // xMin
-            obj.coords[0] = boundVals.xMin + obj.radius;
-            obj.velocity[0] = -obj.velocity[0];
-            break;
-        case 1:
-            // xMax
-            obj.coords[0] = boundVals.xMax - obj.radius;
-            obj.velocity[0] = -obj.velocity[0];
-            break;
-        case 2:
-            // yMin
-            obj.coords[1] = boundVals.yMin + obj.radius;
-            obj.velocity[1] = -obj.velocity[1];
-            break;
-        case 3:
-            // yMax
-            obj.coords[1] = boundVals.yMax - obj.radius;
-            obj.velocity[1] = -obj.velocity[1];
-            break;
-        default:
-            // No collision.
-            break;
+function resolveBoundaryCollision(obj, sides, bounds, settings) {
+    for (const side of sides) {
+        switch(side) {
+            case 0:
+                // xMin
+                obj.coords[0] = bounds.xMin + obj.radius;
+                obj.velocity[0] = -obj.velocity[0];
+                break;
+            case 1:
+                // xMax
+                obj.coords[0] = bounds.xMax - obj.radius;
+                obj.velocity[0] = -obj.velocity[0];
+                break;
+            case 2:
+                // yMin
+                obj.coords[1] = bounds.yMin + obj.radius;
+                obj.velocity[1] = -obj.velocity[1];
+                break;
+            case 3:
+                // yMax
+                obj.coords[1] = bounds.yMax - obj.radius;
+                obj.velocity[1] = -obj.velocity[1];
+                break;
+            default:
+                // No collision.
+                break;
+        }
     }
 }
 
