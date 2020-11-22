@@ -21,16 +21,16 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
-            // Detect and handle object-boundary collisions.
-            const boundarySide = isCollidingBoundary(vals[i], this.bounds);
-            resolveBoundaryCollision(vals[i], boundarySide, this.bounds, this.settings);
-
             // Detect and resolve object-object collisions.
             for (let j = i + 1; j < vals.length; j++) {
                 if (isColliding(vals[i], vals[j])) {
                     resolveCollision(vals[i], vals[j], this.settings);
                 }
             }
+
+            // Detect and handle object-boundary collisions.
+            const sides = isCollidingBoundary(vals[i], this.bounds);
+            resolveBoundaryCollision(vals[i], sides, this.bounds, this.settings);
 
             // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
             // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
