@@ -57,37 +57,26 @@ function polyPolyCollision(obj1, obj2) {
  * @param {Object} bounds - An object containing the boundaries.
  * @returns {number} An integer representing the boundary of collision. -1 if no collision.
  */
-function isCollidingBoundary(obj, bounds) {
+function isCollidingBoundary(obj, bound, isMin, axis) {
     if (obj instanceof Circle) {
-        return circleBoundaryCollision(obj, bounds);
+        return circleBoundaryCollision(obj, bound, isMin, axis);
     }
 }
 
 /**
  * Handles the case where a Circle might be colliding with a boundary.
  * @param {Circle} obj - A circle object.
- * @param {Object} bounds - An object containing the boundary line values.
- * @returns {number[]} An array containing all boundaries the circle collided with.
+ * @param {Object} bound - A number representing the boundary line.
+ * @param {boolean} isMin - Determines whether we should be using the min or max boundary values.
+ * @param {number} axis - The axis we want to test collisions on.
+ * @returns {boolean} Whether a collision has occured.
  */
-// TODO: Rework the function to accept a SINGLE boundary rather than all of them.
-// Return true if the circle collides with that single boundary. Return false otherwise.
-function circleBoundaryCollision(obj, bounds, isMin) {
-    const sides = [];
-
-    if (obj.coords[0] - obj.radius <= bounds.xMin) {
-        sides.push(0);
+function circleBoundaryCollision(obj, bound, isMin, axis) {
+    if (isMin) {
+        return obj.coords[axis] - obj.radius <= bound ? true : false;
+    } else {
+        return obj.coords[axis] + obj.radius >= bound ? true : false;
     }
-    if (obj.coords[0] + obj.radius >= bounds.xMax) {
-        sides.push(1);
-    }
-    if (obj.coords[1] - obj.radius <= bounds.yMin) {
-        sides.push(2);
-    }
-    if (obj.coords[1] + obj.radius >= bounds.yMax) {
-        sides.push(3);
-    }
-
-    return sides;
 }
 
 function polyBoundaryCollision(obj1, bound) {
