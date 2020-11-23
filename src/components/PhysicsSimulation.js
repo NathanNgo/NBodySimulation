@@ -3,6 +3,7 @@ import { SideBar } from './controller/SideBar';
 import { ViewScreen } from './view/ViewScreen';
 import { Circle } from '../physics/rigid';
 import Modal from './controller/Modal';
+import FPSStats from 'react-fps-stats';
 
 // The "actual" root component.
 class PhysicsSimulation extends React.Component {
@@ -131,6 +132,7 @@ class PhysicsSimulation extends React.Component {
 
         return (
             <div className='containerMain'>
+                {/* <FPSStats /> */}
                 <header className='header'>
                     <h1> <span className='acc'> Physics Simulation </span> </h1>
                 </header>
