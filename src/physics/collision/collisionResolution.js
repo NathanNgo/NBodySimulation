@@ -1,4 +1,5 @@
 import { vec2 as v } from 'gl-matrix';
+import { Circle } from '../rigid';
 
 /**
  * Resolves a collision between 2 objects by first ensuring no overlap and then altering velocities.
@@ -81,38 +82,27 @@ function _calcVelocity(cor, vel1, mass1, vel2, mass2) {
 
 /**
  * Resolves a collision between an object and a boundary.
- * @param {RigidBody} obj1 - The first object to resolve.
- * @param {number} sides - An object containing all boundaries the object collided with.
- * @param {Object} bounds - An object containing the boundary line values.
+ * @param {RigidBody} obj - The first object to resolve.
+ * @param {number} bound - A number representing the boundary value.
+ * @param {boolean} isMin - Whether this is a min or max boundary.
+ * @param {number} axis - The axis we want to perform the resolution on.
  * @param {Object} settings - Global parameters the engine should apply.
  */
-function resolveBoundaryCollision(obj, sides, bounds, settings) {
-    for (const side of sides) {
-        switch(side) {
-            case 0:
-                // xMin
-                obj.coords[0] = bounds.xMin + obj.radius;
-                obj.velocity[0] = -obj.velocity[0];
-                break;
-            case 1:
-                // xMax
-                obj.coords[0] = bounds.xMax - obj.radius;
-                obj.velocity[0] = -obj.velocity[0];
-                break;
-            case 2:
-                // yMin
-                obj.coords[1] = bounds.yMin + obj.radius;
-                obj.velocity[1] = -obj.velocity[1];
-                break;
-            case 3:
-                // yMax
-                obj.coords[1] = bounds.yMax - obj.radius;
-                obj.velocity[1] = -obj.velocity[1];
-                break;
-            default:
-                // No collision.
-                break;
-        }
+// TODO: Rework so the boundary correction only applies if the natural behaviour would get
+// the object stuck in the wall, instead of apply boundary correction immediately.
+function resolveBoundaryCollision(obj, bound, isMin, axis, settings) {
+    if (obj instanceof Circle) {
+        _resolveCircleBoundColl(obj, bound, isMin, axis, settings);
+    }
+}
+
+function _resolveCircleBoundColl(obj, bound, isMin, axis, settings) {
+    if (isMin) {
+        obj.coords[axis] = bound + obj.radius;
+        obj.velocity[axis] = -obj.velocity[axis];
+    } else {
+        obj.coords[axis] = bound - obj.radius;
+        obj.velocity[axis] = -obj.velocity[axis];
     }
 }
 
