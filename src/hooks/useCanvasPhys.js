@@ -27,13 +27,11 @@ function useCanvasPhys(vals, onRender, settings) {
         const { width, height } = resize(canvas);
         onRender(width, height);
 
-        const bounds = {
-            xMin: 0,
-            xMax: canvas.width,
-            yMin: 0,
-            yMax: canvas.height
-        }
-        const physEng = new Engine(bounds, settings);
+        const bounds = [
+            [ 0, canvas.width ], // X Bounds.
+            [ 0, canvas.height ] // Y Bounds.
+        ]
+        const physEng = new Engine(bounds, settings, 2);
 
         window.requestAnimationFrame(step);
 
