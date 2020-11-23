@@ -6,13 +6,16 @@ import { vec2 as v } from 'gl-matrix';
 class Engine {
     /**
      * @constructs Creates an instance of the Engine.
-     * @param {number[]} bounds - Array of integers representing boundaries of simulation.
+     * @param {Object} bounds - An array containing arrays for the boundaries of each axis.
+     *                          X, Y, then Z axis respectively. Within each subarray, min then max.
      * @param {Object} settings - An object conitanin
+     * @param {number} dim - The number of dimensions the engine is working in.
      * Engine settings such as graivty and etc.
      */
-    constructor(bounds, settings) {
+    constructor(bounds, settings, dim = 2) {
         this.bounds = bounds;
         this.settings = settings;
+        this.dim = dim;
     }
 
     /**
@@ -29,8 +32,16 @@ class Engine {
             }
 
             // Detect and handle object-boundary collisions.
-            const sides = isCollidingBoundary(vals[i], this.bounds);
-            resolveBoundaryCollision(vals[i], sides, this.bounds, this.settings);
+            for (let axis = 0; axis < this.dim; axis++) {
+                const minBound = this.bounds[axis][0];
+                const maxBound = this.bounds[axis][1];
+
+                if (isCollidingBoundary(vals[i], minBound, true, axis)) { // Min
+                    resolveBoundaryCollision(vals[i], minBound, true, axis, this.settings);
+                } else if (isCollidingBoundary(vals[i], maxBound, false, axis)) { // Max
+                    resolveBoundaryCollision(vals[i], maxBound, false, axis, this.settings);
+                }
+            }
 
             // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
             // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
