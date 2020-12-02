@@ -5,8 +5,10 @@ function SettingsList(props) {
 
     function handleSettingsSubmit(event) {
         const amount = parseInt(settings.amount);
-        const cor = parseFloat(settings.cor).toFixed(2);
-        props.onSettingsSubmit({ amount, cor });
+        const cor = Number(parseFloat(settings.cor).toFixed(2));
+        const gravY = Number(parseFloat(settings.gravY).toFixed(2));
+        const gravX = Number(parseFloat(settings.gravX).toFixed(2));
+        props.onSettingsSubmit({ amount, cor, gravY, gravX });
         event.preventDefault();
     }
 
