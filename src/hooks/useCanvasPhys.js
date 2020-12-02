@@ -35,7 +35,7 @@ function useCanvasPhys(oldVals, onRender, settings) {
         ]
         const physEng = new Engine(bounds, settings, 2);
 
-        window.requestAnimationFrame(step);
+        animId = window.requestAnimationFrame(step);
 
         return () => {
             window.cancelAnimationFrame(animId);
