@@ -73,9 +73,9 @@ function isCollidingBoundary(obj, bound, isMin, axis) {
  */
 function circleBoundaryCollision(obj, bound, isMin, axis) {
     if (isMin) {
-        return obj.coords[axis] - obj.radius <= bound ? true : false;
+        return obj.coords[axis] - obj.radius < bound ? true : false;
     } else {
-        return obj.coords[axis] + obj.radius >= bound ? true : false;
+        return obj.coords[axis] + obj.radius > bound ? true : false;
     }
 }
 
