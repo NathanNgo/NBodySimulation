@@ -24,6 +24,8 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
+            let isBoundCollFrame = false;
+
             // Detect and resolve object-object collisions.
             for (let j = i + 1; j < vals.length; j++) {
                 if (isColliding(vals[i], vals[j])) {
@@ -38,15 +40,19 @@ class Engine {
 
                 if (isCollidingBoundary(vals[i], minBound, true, axis)) { // Min
                     resolveBoundaryCollision(vals[i], minBound, true, axis, this.settings);
+                    isBoundCollFrame = true;
                 } else if (isCollidingBoundary(vals[i], maxBound, false, axis)) { // Max
                     resolveBoundaryCollision(vals[i], maxBound, false, axis, this.settings);
+                    isBoundCollFrame = true;
                 }
             }
 
             // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
             // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
             // implement "sleeping" system, otherwise we have too many collision resolutions calls.
-            /* vals[i].velocity = v.add([], vals[i].velocity, [this.settings.gravX, this.settings.gravY]); */
+            if (!isBoundCollFrame) {
+                vals[i].velocity = v.add([], vals[i].velocity, [this.settings.gravX, this.settings.gravY]);
+            }
 
             // Move the objects by their velocities.
             if (vals[i] instanceof Circle) {
