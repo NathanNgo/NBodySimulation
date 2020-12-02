@@ -16,9 +16,9 @@ class PhysicsSimulation extends React.Component {
             // the need to deep clone the settings objects.
             settings: {
                 amount: 0,
-                gravX: 0,
-                gravY: 0,
-                cor: 1,
+                gravX: 0.00,
+                gravY: 0.00,
+                cor: 1.00,
             },
             canvasWidth: undefined,
             canvasHeight: undefined,
