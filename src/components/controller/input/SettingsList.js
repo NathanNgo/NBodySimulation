@@ -23,18 +23,17 @@ function SettingsList(props) {
                 Number of Objects
                 <input name='amount' type='number' value={settings.amount} onChange={handleSettingsChange} />
             </label>
-            {/* Gravity has been disabled until fixed */}
-            {/*<label>
-                Gravity (Vertical)
-                <input name='gravY' type='number' value={settings.gravY} onChange={handleSettingsChange} />
-            </label>
-            <label>
-                Gravity (Horrizontal)
-                <input name='gravX' type='number' value={settings.gravX} onChange={handleSettingsChange} />
-            </label>*/}
             <label>
                 Coeff. of Restitution
                 <input name='cor' type='number' step='0.01' value={settings.cor} onChange={handleSettingsChange} />
+            </label>
+            <label>
+                Gravity (Vertical)
+                <input name='gravY' type='number' value={settings.gravY} step='0.01' onChange={handleSettingsChange} />
+            </label>
+            <label>
+                Gravity (Horrizontal)
+                <input name='gravX' type='number' value={settings.gravX} step='0.01' onChange={handleSettingsChange} />
             </label>
             <input type='submit' value="Update" />
         </form>
