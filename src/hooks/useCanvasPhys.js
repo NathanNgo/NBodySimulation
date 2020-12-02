@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import draw from '../render/render.js';
 import Engine from '../physics/engine.js';
+import _ from 'lodash';
 
 /**
  * A hook that sets up a Canvas element to use the Physics engine.
@@ -9,8 +10,9 @@ import Engine from '../physics/engine.js';
  * @params {Object} settings - Global parameters the engine should apply.
  * @returns {ref} A React ref that is attached to the Canvas element.
  */
-function useCanvasPhys(vals, onRender, settings) {
+function useCanvasPhys(oldVals, onRender, settings) {
     const canvasRef = useRef(null);
+    const vals = _.cloneDeep(oldVals);
 
     useEffect(() => {
         function step(timestamp) {
