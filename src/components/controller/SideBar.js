@@ -10,13 +10,16 @@ function SideBar(props) {
     return (
         <div>
             <ClosablePanel title='Information' open={true}>
-                {/*<p> The <b>N Body Simulation</b> is designed to represent collisions and interactions between <span className='acc'>N</span> objects. </p>*/}
                 <p>
-                    A simple demonstration of a lightweight physics engine. Still a
-                    <span className='acc'> work in progress </span> and very much incomplete.
-                </p>
-                <p style={{marginTop: '10px'}}>
-                    The ability to customise individual object properties and start/stop the animation have yet to be implemented.
+                    This is a demonstration of a lightweight physics engine. Adjust the engine's parameters by changing the
+                    <span class='acc'> options below</span>. <br /><br />
+
+                    Here's an explanation of the engine's options: <br /> <br />
+                    <b> Number of Objects: </b> The exact number of objects to generate. <br /><br />
+                    <b> Coeff. of Restitution: </b> The amount of energy which remains after a collision. A value of 1 is perfectly
+                    elastic. A value of 0 is perflectly inelastic. Other values can also be explored.<br /><br />
+                    <b> Gravity (Vertical): </b> The amount of gravity in the vertical direction.<br /><br />
+                    <b> Gravity (Horrizontal): </b> The amount of gravity in the horrizontal direction.
                 </p>
             </ClosablePanel>
             {/*<ClosablePanel title='Controls'>
