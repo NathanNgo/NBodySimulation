@@ -88,8 +88,6 @@ function _calcVelocity(cor, vel1, mass1, vel2, mass2) {
  * @param {number} axis - The axis we want to perform the resolution on.
  * @param {Object} settings - Global parameters the engine should apply.
  */
-// TODO: Rework so the boundary correction only applies if the natural behaviour would get
-// the object stuck in the wall, instead of apply boundary correction immediately.
 function resolveBoundaryCollision(obj, bound, isMin, axis, settings) {
     if (obj instanceof Circle) {
         _resolveCircleBoundColl(obj, bound, isMin, axis, settings);
@@ -97,12 +95,12 @@ function resolveBoundaryCollision(obj, bound, isMin, axis, settings) {
 }
 
 function _resolveCircleBoundColl(obj, bound, isMin, axis, settings) {
-    if (isMin) {
+    obj.velocity[axis] = -obj.velocity[axis];
+
+    if (isMin && obj.coords[axis] + obj.velocity[axis] < bound + obj.radius) {
         obj.coords[axis] = bound + obj.radius;
-        obj.velocity[axis] = -obj.velocity[axis];
-    } else {
+    } else if (!isMin && obj.coords[axis] + obj.velocity[axis] > bound - obj.radius) {
         obj.coords[axis] = bound - obj.radius;
-        obj.velocity[axis] = -obj.velocity[axis];
     }
 }
 
