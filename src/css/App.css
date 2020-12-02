@@ -24,12 +24,16 @@
     --updateButtonPressed: #046352;
 
     /* SCROLLBAR COLORS */
+    --scrollBackground: var(--headerBackgroundColor);
     --scrollMain: /*#358f77;*/#1c4f41;
     --scrollHover: #276b59;
 
     /* MODAL COLORS */
     --modalMain: var(--panelColor);
     --modalControls: var(--panelHeaderColor);
+
+    /* BORDER COLORS */
+    --borderColor: #010A0E;
 }
 
 /* FONTS */
@@ -64,7 +68,7 @@ header {
     background-color: var(--headerBackgroundColor);
     padding: 0;
     margin: 0;
-    border-bottom: 3px solid #010A0E;
+    border-bottom: 3px solid var(--borderColor);
 
 }
 
@@ -106,18 +110,18 @@ input[type=number] {
 
 /* SCROLLBAR */
 *::-webkit-scrollbar {
-      width: 12px;               /* width of the entire scrollbar */
-      height: 12px;
+    width: 12px;               /* width of the entire scrollbar */
+    height: 12px;
 }
 
 *::-webkit-scrollbar-track {
-    background: var(--headerBackgroundColor);        /* color of the tracking area */
+    background: var(--scrollBackground);        /* color of the tracking area */
 }
 
 *::-webkit-scrollbar-thumb {
     background-color: var(--scrollMain);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid var(--headerBackgroundColor);  /* creates padding around scroll thumb */
+    border: 3px solid var(--scrollBackground);  /* creates padding around scroll thumb */
 }
 
 *::-webkit-scrollbar-thumb:hover {
@@ -157,7 +161,7 @@ a:hover {
 .sideBar {
     background-color: var(--sideBackgroundColor);
     min-width: 200px;
-    overflow: auto;
+    overflow-y: scroll;
     grid-column: 1 / 7;
     grid-row: 2 / 24;
 }
