@@ -32,7 +32,7 @@ function SettingsList(props) {
                 <input name='gravY' type='number' value={settings.gravY} step='0.01' onChange={handleSettingsChange} />
             </label>
             <label>
-                Gravity (Horrizontal)
+                Gravity (Horizontal)
                 <input name='gravX' type='number' value={settings.gravX} step='0.01' onChange={handleSettingsChange} />
             </label>
             <input type='submit' value="Update" />
