@@ -20,7 +20,7 @@ function SideBar(props) {
                     elastic. A value of 0 is perfectly inelastic. Other values can also be explored.<br /><br />
                     <b> Gravity (Vertical): </b> The amount of gravity in the vertical direction. Values between 0 and 0.5 provide
                     the best results, but other values can be explored.<br /><br />
-                    <b> Gravity (Horizontal): </b> The amount of gravity in the horrizontal direction. Values between 0 and 0.5 provide
+                    <b> Gravity (Horizontal): </b> The amount of gravity in the horizontal direction. Values between 0 and 0.5 provide
                     the best results, but other values can be explored.
 
                 </p>
