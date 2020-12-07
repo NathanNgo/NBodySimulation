@@ -2,18 +2,19 @@
 
 /* VARIABLES */
 :root {
-    --mainBackgroundColor: #021018;
+    --mainBackgroundColor: /*#021018;*/ #010b10;
     /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
     --headerBackgroundColor: #072232;/*#02131c;*//*#021c2b;*/
-    --sideBackgroundColor: #021c2b;/*#02131c;*/
+    --sideBackgroundColor: /*#021c2b;*//*#02131c;*/#031825;
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
     --secondAccentText: /*#6e110a;*/#79140c;
+    --thirdAccentText: #55aafa;
 
     /* PANEL COLORS */
     --panelColor: #093047;
     --panelHeaderColor: #0a4161;
-    --panelHover: #0a3954;
+    --panelHover: /*#0a3954;*/#0a3852;
 
     /* BUTTON COLORS */
     --playButtonColor: /*#00E676;*/ #28a745;
@@ -68,8 +69,6 @@ header {
     background-color: var(--headerBackgroundColor);
     padding: 0;
     margin: 0;
-    border-bottom: 3px solid var(--borderColor);
-
 }
 
 footer {
@@ -77,7 +76,6 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: var(--headerBackgroundColor);
-    border-top: 3px solid #010A0E;
 }
 
 body {
@@ -131,15 +129,13 @@ input[type=number] {
 /* LINKS */
 /* FIXME: Yellow looks terrible. */
 a:link {
-    color: #f5f5f4;
-    /*background-color: #b3dcff;*/
+    color: var(--accentText);
 }
 a:visited {
-    color: #f5f5f4;
-    /*background-color: #b3dcff*/
+    color: var(--accentText);
 }
 a:hover {
-    background-color: #5babf0;
+    color: var(--thirdAccentText);
 }
 
 /* GRID SETUP */
@@ -161,7 +157,8 @@ a:hover {
 .sideBar {
     background-color: var(--sideBackgroundColor);
     min-width: 200px;
-    overflow-y: scroll;
+    border-top: 3px solid #010A0E;
+    border-bottom: 3px solid #010A0E;
     grid-column: 1 / 7;
     grid-row: 2 / 24;
 }
@@ -387,4 +384,44 @@ form input[type=submit]:active {
 .modalClosed {
     visibility: hidden;
     opacity: 0;
+}
+
+/* TABS */
+.tabButton {
+    padding: 10px;
+    margin-bottom: -2px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.tabInactive {
+    background-color: var(--panelHeaderColor);
+}
+
+.tabInactive:hover {
+    background-color: var(--panelHover);
+}
+
+.tabActive {
+    border: 2px solid var(--accentText);
+    border-bottom: 2px solid var(--sideBackgroundColor);
+    background-color: var(--sideBackgroundColor);
+    cursor: default;
+}
+
+.tabList {
+    display: inline-block;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 2px solid var(--accentText);
+}
+
+.tabContent {
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--panelColor);
+    border-radius: 10px;
 }
