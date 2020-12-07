@@ -2,7 +2,7 @@ import React from 'react';
 import { SideBar } from './controller/SideBar';
 import { ViewScreen } from './view/ViewScreen';
 import { Circle } from '../physics/rigid';
-import Modal from './controller/Modal';
+import Modal from './controller/containers/Modal';
 import FPSStats from 'react-fps-stats';
 
 // The "actual" root component.
