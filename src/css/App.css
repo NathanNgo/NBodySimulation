@@ -2,17 +2,17 @@
 
 /* VARIABLES */
 :root {
-    --mainBackgroundColor: /*#021018;*/ #010b10;
+    --mainBackgroundColor: /*#021018;*/ /*#010b10;*/ #021925;
     /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
-    --headerBackgroundColor: #072232;/*#02131c;*//*#021c2b;*/
-    --sideBackgroundColor: /*#021c2b;*//*#02131c;*/#031825;
+    --headerBackgroundColor: #06293f;/*#02131c;*//*#021c2b;*/
+    --sideBackgroundColor: /*#021c2b;*//*#02131c;*/#06293f;
     --mainText: #f5f5f4;
     --accentText: #06d6a0;
     --secondAccentText: /*#6e110a;*/#79140c;
     --thirdAccentText: #55aafa;
 
     /* PANEL COLORS */
-    --panelColor: #093047;
+    --panelColor: /*#093047;*/ #0c405e;
     --panelHeaderColor: #0a4161;
     --panelHover: /*#0a3954;*/#0a3852;
 
