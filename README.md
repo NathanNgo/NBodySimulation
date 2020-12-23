@@ -10,6 +10,5 @@ https://physics-simulation.netlify.app/
 * Polygon Collisions
 * Interactive Options
 * Polygon-Circle Collisions
-* CSS Redesign
-* Animated Accordion Panels
-* Collision Resolution
+* Rework gravity. Disable only on collision axis, not on every axis.
+* Add coefficient of restitution to boundaries.
