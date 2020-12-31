@@ -10,9 +10,10 @@ import _ from 'lodash';
  * @params {Object} settings - Global parameters the engine should apply.
  * @returns {ref} A React ref that is attached to the Canvas element.
  */
-function useCanvasPhys(oldVals, onRender, settings) {
+function useCanvasPhys(initVals, onRender, initSettings) {
     const canvasRef = useRef(null);
-    const vals = _.cloneDeep(oldVals);
+    const vals = _.cloneDeep(initVals);
+    const settings = _.cloneDeep(initSettings);
 
     useEffect(() => {
         function step(timestamp) {
@@ -33,6 +34,7 @@ function useCanvasPhys(oldVals, onRender, settings) {
             [ 0, canvas.width ], // X Bounds.
             [ 0, canvas.height ] // Y Bounds.
         ]
+
         const physEng = new Engine(bounds, settings, 2);
 
         animId = window.requestAnimationFrame(step);
