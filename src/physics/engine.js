@@ -1,4 +1,4 @@
-import { RigidBody, Circle, Polygon } from './rigid';
+import { Circle } from './rigid';
 import { isColliding, isCollidingBoundary } from './collision/collisionDetection';
 import { resolveCollision, resolveBoundaryCollision } from './collision/collisionResolution';
 import { vec2 as v } from 'gl-matrix';
@@ -24,8 +24,6 @@ class Engine {
      */
     update(vals) {
         for (let i = 0; i < vals.length; i++) {
-            let isBoundCollFrame = false;
-
             // Detect and resolve object-object collisions.
             for (let j = i + 1; j < vals.length; j++) {
                 if (isColliding(vals[i], vals[j])) {
@@ -35,6 +33,7 @@ class Engine {
 
             // Detect and handle object-boundary collisions.
             for (let axis = 0; axis < this.dim; axis++) {
+                let isBoundCollFrame = false;
                 const minBound = this.bounds[axis][0];
                 const maxBound = this.bounds[axis][1];
 
@@ -45,13 +44,14 @@ class Engine {
                     resolveBoundaryCollision(vals[i], maxBound, false, axis, this.settings);
                     isBoundCollFrame = true;
                 }
-            }
 
-            // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
-            // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
-            // implement "sleeping" system, otherwise we have too many collision resolutions calls.
-            if (!isBoundCollFrame) {
-                vals[i].velocity = v.add([], vals[i].velocity, [this.settings.gravX, this.settings.gravY]);
+                // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
+                // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
+                // implement "sleeping" system, otherwise we have too many collision resolutions calls.
+                // TODO: Double check this.
+                if (!isBoundCollFrame) {
+                    vals[i].velocity[axis] = vals[i].velocity[axis] + this.settings.gravity[axis]
+                }
             }
 
             // Move the objects by their velocities.
@@ -60,6 +60,7 @@ class Engine {
                     vals[i].coords[c] += vals[i].velocity[c];
                 }
             }
+
         }
     }
 
