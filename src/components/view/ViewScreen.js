@@ -7,7 +7,7 @@ function ViewScreen(props) {
             <CanvasPhys
                 vals={props.vals}
                 onRender={props.onRender}
-                settings={props.settings}
+                engineSettings={props.engineSettings}
             />
         </div>
     );
