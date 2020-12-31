@@ -6,7 +6,7 @@
     /* Maybe find a lighter shade as we swapped with sideBackgroundColor */
     --headerBackgroundColor: #06293f;/*#02131c;*//*#021c2b;*/
     --sideBackgroundColor: /*#021c2b;*//*#02131c;*/#06293f;
-    --mainText: #f5f5f4;
+    --mainText: /*#f5f5f4;*/ #eaeae9;
     --accentText: #06d6a0;
     --secondAccentText: /*#6e110a;*/#79140c;
     --thirdAccentText: #55aafa;
@@ -26,8 +26,8 @@
 
     /* SCROLLBAR COLORS */
     --scrollBackground: var(--headerBackgroundColor);
-    --scrollMain: /*#358f77;*/#1c4f41;
-    --scrollHover: #276b59;
+    --scrollMain: /*#358f77;*//*#276b59;*/ #35967d;
+    --scrollHover: /*#276b59;*/ #3eb898;
 
     /* MODAL COLORS */
     --modalMain: var(--panelColor);
@@ -58,7 +58,7 @@ div#root {
     height: 100%;
 }
 
-p, h1, h2, h3, label, input {
+p, h1, h2, h3, h4, label, input, b, u{
     margin: 0;
     color: var(--mainText);
 }
@@ -161,6 +161,7 @@ a:hover {
     border-bottom: 3px solid #010A0E;
     grid-column: 1 / 7;
     grid-row: 2 / 24;
+    overflow: auto;
 }
 
 .viewScreen {
@@ -200,6 +201,13 @@ a:hover {
 
 .headerClosed {
     border-radius: 10px;
+}
+
+.panelTitle {
+    padding: 10px;
+    text-align: center;
+    background-color: var(--panelColor);
+    border-radius: 10px 10px 0 0;
 }
 
 .panelSeperator {
@@ -301,10 +309,15 @@ form input[type=number] {
     text-align: center;
 }
 
+form input[type=checkbox] {
+    color: var(--mainBackgroundColor);
+    width: 22%;
+}
+
 form input[type=submit] {
     display: block;
     margin: 15px auto 5px auto;
-    width: 100px;
+    padding: 0 10px;
     min-width: 58px;
     min-height: 36px;
     border: none;
@@ -417,11 +430,4 @@ form input[type=submit]:active {
     justify-content: space-between;
     width: 100%;
     border-bottom: 2px solid var(--accentText);
-}
-
-.tabContent {
-    margin: 10px;
-    padding: 10px;
-    background-color: var(--panelColor);
-    border-radius: 10px;
 }
