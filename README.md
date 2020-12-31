@@ -10,5 +10,5 @@ https://physics-simulation.netlify.app/
 * Polygon Collisions
 * Interactive Options
 * Polygon-Circle Collisions
-* Rework gravity. Disable only on collision axis, not on every axis.
 * Add coefficient of restitution to boundaries.
+* Rework collision displacement to depend on ratio of mass, rather than be constant for both objects.
