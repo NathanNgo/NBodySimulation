@@ -5,21 +5,34 @@ import _ from 'lodash';
 
 /**
  * A hook that sets up a Canvas element to use the Physics engine.
- * @params {RigidBody[]} vals - An array of RigidBody objects.
+ * @params {RigidBody[]} initVals - An array of RigidBody objects.
  * @params {Callback} onRender - Callback function used to set Width and Height after Canvas element has rendered.
- * @params {Object} settings - Global parameters the engine should apply.
+ * @params {Object} initSettings - Global parameters the engine should apply.
  * @returns {ref} A React ref that is attached to the Canvas element.
  */
 function useCanvasPhys(initVals, onRender, initSettings) {
     const canvasRef = useRef(null);
     const vals = _.cloneDeep(initVals);
     const settings = _.cloneDeep(initSettings);
+    let startTime = 0
 
     useEffect(() => {
         function step(timestamp) {
-            draw(ctx, vals);
+            timestamp *= 0.001;
+            let timeDelta = timestamp - startTime;
+
+            if (startTime === 0) {
+                timeDelta = 0;
+            }
+
             /* eslint-disable-next-line */ /* We want to reset on re-render.*/
-            physEng.update(vals);
+            startTime = timestamp;
+
+            /* eslint-disable-next-line */ /* We want to reset on re-render.*/
+            physEng.update(vals, timeDelta);
+
+            draw(ctx, vals);
+
             animId = window.requestAnimationFrame(step);
         }
 
