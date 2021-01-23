@@ -19,15 +19,18 @@ function resolveCollision(obj1, obj2, settings) {
  * @param {Object} settings - Global parameters the engine should apply.
  */
 function _resetPositions(obj1, obj2, settings) {
-    // TODO: Separate the objects based on a ratio of mass difference rather than by equal amounts.
-    // Currently, both objects get moved the same amount, regardless of mass.
     // TODO: Check for the type of object and reset positions based on type.
     const len = Math.sqrt((obj1.coords[0] - obj2.coords[0])**2 + (obj1.coords[1] - obj2.coords[1])**2);
-    const dist = (obj1.radius + obj2.radius - len)/2;
+    const dist = (obj1.radius + obj2.radius - len);
+
+    const ratio1 = 1 - (obj1.mass/(obj1.mass + obj2.mass));
+    const ratio2 = 1 - (obj2.mass/(obj1.mass + obj2.mass));
+
     const pushVec2 = v.normalize([], v.sub([], obj2.coords, obj1.coords));
     const pushVec1 = v.scale([], pushVec2, -1);
-    obj1.coords = v.add([], obj1.coords, v.scale([], pushVec1, dist));
-    obj2.coords = v.add([], obj2.coords, v.scale([], pushVec2, dist));
+
+    obj1.coords = v.add([], obj1.coords, v.scale([], pushVec1, dist*ratio1));
+    obj2.coords = v.add([], obj2.coords, v.scale([], pushVec2, dist*ratio2));
 }
 
 /**
@@ -95,7 +98,7 @@ function resolveBoundaryCollision(obj, bound, isMin, axis, settings) {
 }
 
 function _resolveCircleBoundColl(obj, bound, isMin, axis, settings) {
-    obj.velocity[axis] = -obj.velocity[axis];
+    obj.velocity[axis] = -obj.velocity[axis]*settings.boundCor;
 
     if (isMin && obj.coords[axis] + obj.velocity[axis] < bound + obj.radius) {
         obj.coords[axis] = bound + obj.radius;
