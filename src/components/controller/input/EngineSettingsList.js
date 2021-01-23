@@ -8,7 +8,11 @@ function EngineSettingsList(props) {
         const gravX = Number(parseFloat(settings.gravity[0]).toFixed(2));
         const gravY = Number(parseFloat(settings.gravity[1]).toFixed(2));
 
-        props.onEngSettingsSubmit({ ...settings, cor, gravity: [gravX, gravY] });
+        const packedSettings = { ...settings, cor, gravity: [gravX, gravY] };
+
+        setSettings(packedSettings);
+
+        props.onEngSettingsSubmit(packedSettings);
 
         event.preventDefault();
     }
@@ -31,8 +35,12 @@ function EngineSettingsList(props) {
     return (
         <form onSubmit={handleSettingsSubmit}>
             <label>
-                Coeff. of Restitution
+                Object Restitution
                 <input name='cor' type='number' step='0.01' value={settings.cor} onChange={handleSettingsChange} />
+            </label>
+            <label>
+                Boundary Restitution
+                <input name='boundCor' type='number' step='0.01' value={settings.boundCor} onChange={handleSettingsChange} />
             </label>
             <label>
                 Gravity (Vertical)
