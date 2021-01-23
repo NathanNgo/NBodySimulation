@@ -28,12 +28,12 @@ function SideBar(props) {
                     </Panel>
                     <Panel title='Engine Parameters'>
                         <p>
-                            <b><u>Coeff. of Restitution</u></b>: The amount of energy which remains after a collision. A value of 1 is perfectly
+                            <b><u>Object Restitution</u></b>: The Coefficient of Restitution between objects. Determines the amount of energy which remains after a collision. A value of 1 is perfectly
                             elastic. A value of 0 is perfectly inelastic. Other values can also be explored.<br /><br />
-                            <b><u>Gravity (Vertical)</u></b>: The amount of gravity in the vertical direction. Values between 0 and 0.5 provide
-                            the best results, but other values can be explored.<br /><br />
-                            <b><u>Gravity (Horizontal)</u></b>: The amount of gravity in the horizontal direction. Values between 0 and 0.5 provide
-                            the best results, but other values can be explored.
+                            <b><u>Boundary Restitution</u></b>: The Coefficient of Restitution between an object and the boundaries. Determines the amount of energy which remains after a collision. A value of 1 is perfectly
+                            elastic. A value of 0 is perfectly inelastic. Other values can also be explored.<br /><br />
+                            <b><u>Gravity (Vertical)</u></b>: The amount of gravity in the vertical direction.<br /><br />
+                            <b><u>Gravity (Horizontal)</u></b>: The amount of gravity in the horizontal direction.
                         </p>
                     </Panel>
                 </div>
