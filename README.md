@@ -9,4 +9,4 @@ https://physics-simulation.netlify.app/
 * Polygon Collisions
 * Interactive Options
 * Polygon-Circle Collisions
-* Add damping and air friction.
+* Damping and Air Friction.
