@@ -1,5 +1,5 @@
 import { Circle, Polygon } from '../rigid';
-import { vec2 } from 'gl-matrix';
+import { vec2 as v} from 'gl-matrix';
 
 /**
  * Determines the type of the 2 objects and checks if they're colliding.
@@ -94,9 +94,9 @@ function getAxes(obj) {
 
     for (const vert of obj.vertices) {
         // 0 is x component, 1 is y.
-        const edge = new vec2.fromValues(vert[0] - prev[0], vert[1] - prev[1])
+        const edge = new v.fromValues(vert[0] - prev[0], vert[1] - prev[1])
         // Swap x and y components of edge and negate one.
-        axes.push(new vec2.fromValues(-edge[1], edge[0]));
+        axes.push(new v.fromValues(-edge[1], edge[0]));
         prev = vert;
     }
 
