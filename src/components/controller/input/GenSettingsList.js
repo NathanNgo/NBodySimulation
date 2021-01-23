@@ -21,30 +21,23 @@ function GenSettingsList(props) {
             maxMass = minMass;
         }
 
+        const packedSettings = {
+            amount,
+            minRadius,
+            maxRadius,
+            minVel,
+            maxVel,
+            minMass,
+            maxMass,
+            massGradient
+        }
+
         // Forces a settings list re-render so that the corrected values are reflected immediately
         // instead of needing to refresh the tab to see the corrected values.
-        setSettings({
-            amount,
-            minRadius,
-            maxRadius,
-            minVel,
-            maxVel,
-            minMass,
-            maxMass,
-            massGradient
-        });
+        setSettings(packedSettings);
 
         // Updates the values.
-        props.onGenSettingsSubmit({
-            amount,
-            minRadius,
-            maxRadius,
-            minVel,
-            maxVel,
-            minMass,
-            maxMass,
-            massGradient
-        });
+        props.onGenSettingsSubmit(packedSettings);
 
         event.preventDefault();
     }
