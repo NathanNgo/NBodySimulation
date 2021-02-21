@@ -10,3 +10,5 @@ https://physics-simulation.netlify.app/
 * Interactive Options
 * Polygon-Circle Collisions
 * Damping and Air Friction
+* Particle Excitation (Especially when stuck)
+* Pause time when tabbed out.
