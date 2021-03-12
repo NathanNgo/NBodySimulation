@@ -12,3 +12,8 @@ https://physics-simulation.netlify.app/
 * Damping and Air Friction
 * Particle Excitation (Especially when stuck)
 * Pause time when tabbed out.
+* Rework the SettingsList components to be reuasable and modular. Move specific cases to a json file.
+* Maybe implement wrapper components around input types so that we can spread the javascript objects in.
+
+## Bugs to Fix
+* Need to fix prediction techniques with boundary collisions, as decoupling the engine from frame rate has broken some assumptions of the prediction technique.
