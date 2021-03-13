@@ -14,6 +14,7 @@ https://physics-simulation.netlify.app/
 * Pause time when tabbed out.
 * Rework the SettingsList components to be reuasable and modular. Move specific cases to a json file.
 * Maybe implement wrapper components around input types so that we can spread the javascript objects in.
+* Pause time or implement a max time delta when user tabs away. Prevents objects teleporting in time.
 
 ## Bugs to Fix
 * Need to fix prediction techniques with boundary collisions, as decoupling the engine from frame rate has broken some assumptions of the prediction technique.
