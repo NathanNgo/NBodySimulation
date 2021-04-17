@@ -1,0 +1,34 @@
+[
+    {
+        displayName: "Object Restitution",
+        description: "",
+        name: "cor",
+        type: "number",
+        step: "0.01",
+        value: "cor"
+    },
+    {
+        displayName: "Boundary Restitution",
+        description: "",
+        name: "boundCor",
+        type: "number",
+        step: "0.01",
+        value: "boundaryCor"
+    },
+    {
+        displayName: "Gravity (Vertical)",
+        description: "",
+        name: "gravY",
+        type: "number",
+        value: "gravity",
+        valueIndex: 1
+    },
+    {
+        displayName: "Gravity (Horizontal)",
+        description: "",
+        name: "gravX",
+        type: "number",
+        value: "gravity",
+        valueIndex: 0
+    }
+]

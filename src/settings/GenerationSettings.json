@@ -1,0 +1,64 @@
+[
+    {
+        displayName: "Number of Objects",
+        description: "",
+        name: "amount",
+        type: "number",
+        value: "amount"
+    },
+    {
+        displayName: "Radius (Min)",
+        description: "",
+        name: "minRadius",
+        type: "number",
+        step: "0.01",
+        value: "minRadius"
+    },
+    {
+        displayName: "Radius (Max)",
+        description: "",
+        name: "maxRadius",
+        type: "number",
+        step: 0.01,
+        value: "maxRadius"
+    },
+    {
+        displayName: "Velocity (Min)",
+        description: "",
+        name: "minVel",
+        type: "number",
+        step: 0.01,
+        value: "minVel"
+    },
+    {
+        displayName: "Velocity (Max)",
+        description: "",
+        name: "maxVel",
+        type: "number",
+        step: 0.01,
+        value: "maxVel"
+    },
+    {
+        displayName: "Mass (Min)",
+        description: "",
+        name: "minMass",
+        type: "number",
+        step: 0.01,
+        value: "minMass"
+    },
+    {
+        displayName: "Mass (Max)",
+        description: "",
+        name: "maxMass",
+        type: "number",
+        step: 0.01,
+        value: "maxMass"
+    },
+    {
+        displayName: "Mass Color Gradient",
+        description: "",
+        name: "massGradient",
+        type: "checkbox",
+        checked: "massGradient"
+    }
+]

@@ -44,10 +44,11 @@ class Engine {
                     isBoundCollFrame = true;
                 }
 
-                // TODO: Currently inaccurate. Coliisions lose energy when gravity is on, even with
-                // perfectly elastic boundaries. Fix by not using Euler Integration. Also need to
+                // TODO: Currently inaccurate. Fix by not using Euler Integration. Also need to
                 // implement "sleeping" system, otherwise we have too many collision resolutions calls.
                 // TODO: Double check this.
+                // Perfectly elastic collisions no longer lose energy. Fixed by turning off gravity
+                // during boundary collision frames.
                 if (!isBoundCollFrame) {
                     vals[i].velocity[axis] = vals[i].velocity[axis] + this.settings.gravity[axis]
                 }

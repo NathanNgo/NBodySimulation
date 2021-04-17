@@ -98,7 +98,38 @@ function resolveBoundaryCollision(obj, bound, isMin, axis, settings) {
 }
 
 function _resolveCircleBoundColl(obj, bound, isMin, axis, settings) {
+    // FIXME: THIS IS CURRENTLY BROKEN!!
+    // Objects are getting stuck in the boundaries when the Cor is between
+    // 0 and 1.
+    //
+    // The issue is not with how you've applied the boundary COR, but rather how
+    // you've decoupled frame rate and time. The predictive technique you're using
+    // below in the collision correction assumes a CONSTANT amount of time passes
+    // after each frame. This is an issue when that assumption is not true.
+    //
+    // Assume 1 second passes and the calculations are run. The prediction assumes
+    // that another second will have passed before it runs again. Therefore,
+    // if 1 second passes, the assumption will be correct and the object
+    // will not get stuck. However, if the assumption does not hold, the code
+    // will still CLEAR the object and therefore not apply the correction, but
+    // the amount of distance the object travels in the time delta may not actually
+    // be enough for it to clear the boundary, even though the prediction technique
+    // stated that it would.
+    //
+    // For e.g. if 1 second passes, it might move 10m, which is enough to clear, and
+    // the prediction technique assumes 1 second has passed. However, in reality,
+    // only 0.5 seconds may have passed before this code is being run again, and therefore
+    // it has not moved enough to properly clear the boundary, even though the prediction
+    // tecnique said that it would.
+
+    /*
+     * SOLUTION: Calculate amount of distance it would have moved for free, and deduct
+     * it from the velocity in the next frame?
+     */
     obj.velocity[axis] = -obj.velocity[axis]*settings.boundCor;
+    if (axis === 1) {
+        console.log(obj.velocity[axis])
+    }
 
     if (isMin && obj.coords[axis] + obj.velocity[axis] < bound + obj.radius) {
         obj.coords[axis] = bound + obj.radius;

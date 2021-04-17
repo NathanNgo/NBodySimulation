@@ -1,8 +1,7 @@
 import React from 'react';
 import { SideBar } from './controller/SideBar';
 import { ViewScreen } from './view/ViewScreen';
-import { genColorGradient, genRandAttr, genCircleVals } from '../utils/generators';
-import { Circle } from '../physics/rigid';
+import { genCircleVals } from '../utils/generators';
 import Modal from './controller/containers/Modal';
 import FPSStats from 'react-fps-stats';
 
@@ -31,8 +30,10 @@ class PhysicsSimulation extends React.Component {
             canvasWidth: undefined,
             canvasHeight: undefined,
             canvasHasRendered: false,
-            aninIsPlaying: true,
-            valSelected: null,
+            animIsPlaying: true,
+            // Undefined means we are eventually going to assign the variable a value.
+            // Null means we are purposefully setting the variable to have "no value".
+            valSelected: undefined,
             modalOpen: false,
         }
 
